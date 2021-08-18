@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-grayon select-none text-right py-1 pr-5">
+  <div class="bg-grayon select-none text-right py-0.5 pr-5">
     <span>Login</span> &nbsp;|&nbsp;
     <span>Register</span>
   </div>
