@@ -27,7 +27,11 @@ module.exports = {
       purple: colors.violet,
       pink: colors.pink,
       yellowPastel: "#F3F094",
-      grayon: "#F5F5F5"
+      grayon: "#F5F5F5",
+      tb: "#C5E2F1",
+      tp: "#E8D4D9",
+      ty: "#FDF0DE",
+      footer: "#EDE734",
     },
     spacing: {
       px: '1px',
