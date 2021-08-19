@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
     <div class="bg-grayon select-none text-right py-0.5 pr-8">
-      <span class="" v-on:click="toggleModalLogin()">Login</span>
+      <button class="" v-on:click="toggleModalLogin()">Login</button>
       <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      <span class="" v-on:click="toggleModalRegister()">Register</span>
+      <button class="" v-on:click="toggleModalRegister()">Register</button>
     </div>
     <div class="grid grid-cols-3 justify-items-stretch shadow-md">
       <div><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16" /></router-link></div>
