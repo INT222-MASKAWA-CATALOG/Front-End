@@ -18,7 +18,7 @@
             </div>
             <div class="password flex flex-col">
               <label for="password" class="text-gray-400 font-light text-left">Password</label>
-              <input type="text" id="password" v-model="password" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+              <input type="password" id="password" v-model="password" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
             </div>
           </div>
         <!--footer-->
