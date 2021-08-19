@@ -32,6 +32,7 @@ module.exports = {
       tp: "#E8D4D9",
       ty: "#FDF0DE",
       footer: "#EDE734",
+      sky: "#6FCDEB",
     },
     spacing: {
       px: '1px',

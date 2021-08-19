@@ -1,6 +1,23 @@
 <template>
-  <router-view/>
+  <router-view />
+  <div v-if="showModalLogin || showModalRegister" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
 </template>
+
+<script>
+export default {
+    components: {
+    },
+    data () {
+      return {
+        
+      }
+    }
+    ,
+    methods: {
+      
+    }
+}
+</script>
 
 <style>
 #app {
