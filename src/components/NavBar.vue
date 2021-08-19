@@ -7,7 +7,7 @@
     </div>
     <div class="grid grid-cols-3 justify-items-stretch shadow-md">
       <div><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16" /></router-link></div>
-      <div class="justify-self-center self-center text-xl">{{ head }}</div>
+      <div class="justify-self-center self-center text-xl select-none">{{ head }}</div>
       <div class="flex justify-self-end self-center pr-7">
         <div class="border bg-gray-200 rounded-full p-1 mx-1">
           <i class="ri-search-line text-lg"></i>&nbsp;&nbsp;
