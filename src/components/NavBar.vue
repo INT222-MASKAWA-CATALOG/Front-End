@@ -5,10 +5,10 @@
       <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       <button class="" v-on:click="toggleModalRegister()">Register</button>
     </div>
-    <div class="grid grid-cols-3 justify-items-stretch shadow-md">
-      <div><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16" /></router-link></div>
-      <div class="justify-self-center self-center text-xl select-none">{{ head }}</div>
-      <div class="flex justify-self-end self-center pr-7">
+    <div class="flex shadow-md">
+      <div class="mr-auto justify-center"><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16"></router-link></div>
+      <div class="self-center text-xl select-none justify-center">{{ head }}</div>
+      <div class="self-center flex pr-7 ml-auto justify-center">
         <div class="border bg-gray-200 rounded-full p-1 mx-1">
           <i class="ri-search-line text-lg"></i>&nbsp;&nbsp;
           <input type="text" placeholder="Search" class="bg-gray-200 focus:outline-none" />

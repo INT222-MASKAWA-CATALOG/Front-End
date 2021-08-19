@@ -1,5 +1,5 @@
 <template>
-    <nav-bar head="Maskawa" />
+    <nav-bar head="MASKAWA" />
 </template>
 
 <script>
