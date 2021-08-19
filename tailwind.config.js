@@ -33,6 +33,7 @@ module.exports = {
       ty: "#FDF0DE",
       footer: "#EDE734",
       sky: "#6FCDEB",
+      orange: "#F99928",
     },
     spacing: {
       px: '1px',
