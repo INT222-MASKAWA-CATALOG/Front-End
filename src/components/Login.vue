@@ -2,9 +2,9 @@
   <div class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
     <div class="relative w-xl my-6 mx-auto max-w-xl">
       <!--content-->
-      <div class="border-0 rounded-lg shadow-lg w-96 bg-white outline-none focus:outline-none">
+      <div class="rounded-lg shadow-lg w-96 bg-white outline-none focus:outline-none">
         <!--header-->
-        <div class="flex flex-col items-start justify-between border-b border-solid border-blueGray-200 rounded-t">
+        <div class="flex flex-col items-start justify-between">
           <!-- Close Icon -->
           <button class="ri-close-line p-1 ml-auto text-black float-right text-3xl font-semibold" v-on:click="toggleModalLogin()" />
           <img src="../assets/maskawa_logo.png" class="w-48 mx-auto" />
