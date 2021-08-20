@@ -16,18 +16,22 @@
             <div class="username flex flex-col">
               <label for="username" class="text-gray-400 font-light text-left">Username</label>
               <input type="text" id="username" v-model="username" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+              <p v-if="this.invalidUsername" class="text-red-600 text-sm text-left font-extralight">Please Enter Username !!</p>
             </div>
             <div class="password flex flex-col">
               <label for="password" class="text-gray-400 font-light text-left">Password</label>
               <input type="password" id="password" v-model="password" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+              <p v-if="this.invalidPassword" class="text-red-600 text-sm text-left font-extralight">Please Enter Password !!</p>
             </div>
             <div class="email flex flex-col">
               <label for="email" class="text-gray-400 font-light text-left">Email</label>
               <input type="text" id="email" v-model="email" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+              <p v-if="this.invalidEmail" class="text-red-600 text-sm text-left font-extralight">Please Enter Email !!</p>
             </div>
             <div class="phone flex flex-col">
               <label for="phone" class="text-gray-400 font-light text-left">Phone Number</label>
               <input type="text" id="phone" v-model="phone" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+              <p v-if="this.invalidPhone" class="text-red-600 text-sm text-left font-extralight">Please Enter Phone Number !!</p>
             </div>
             <div class="gender flex flex-col">
               <label for="gender" class="text-gray-400 font-light text-left">Gender</label>
@@ -38,6 +42,7 @@
                   <input type="radio" id="radioWomen" value="women" v-model="gender" class="opacity-0 fixed w-0">
                   <label for="radioWomen" class="radioGender inline-block bg-gray-100 px-2 py-1 border-2 border-gray-300 rounded-md select-none">WOMEN</label>
               </div>
+              <p v-if="this.invalidGender" class="text-red-600 text-sm text-left font-extralight">Please Select Gender !!</p>
             </div>
           </div>
         <!--footer-->
@@ -81,11 +86,24 @@ export default {
       email: "",
       phone: "",
       gender: "",
+      invalidUsername: false,
+      invalidPassword: false,
+      invalidEmail: false,
+      invalidPhone: false,
+      invalidGender: false
     }
   },
   methods: {
     async submitRegister () {
+      this.checkField();
       alert(this.username + this.password + this.gender)
+    },
+    async checkField () {
+      this.invalidUsername = this.username === "" ? true : false ;
+      this.invalidPassword = this.password === "" ? true : false ;
+      this.invalidEmail = this.email === "" ? true : false ;
+      this.invalidPhone = this.phone === "" ? true : false ;
+      this.invalidGender = this.gender === "" ? true : false ;
     },
     async toggleModalRegister () {
       this.$emit("toggle-modal-register");

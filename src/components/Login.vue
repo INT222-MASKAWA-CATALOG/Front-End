@@ -15,10 +15,12 @@
             <div class="username flex flex-col">
               <label for="username" class="text-gray-400 font-light text-left">Username</label>
               <input type="text" id="username" v-model="username" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+              <p v-if="this.invalidUsername" class="text-red-600 text-sm text-left font-extralight">Please Enter Username !!</p>
             </div>
             <div class="password flex flex-col">
               <label for="password" class="text-gray-400 font-light text-left">Password</label>
               <input type="password" id="password" v-model="password" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+              <p v-if="this.invalidPassword" class="text-red-600 text-sm text-left font-extralight">Please Enter Password !!</p>
             </div>
           </div>
         <!--footer-->
@@ -44,11 +46,19 @@ export default {
     return {
       username: "",
       password: "",
+      invalidUsername: false,
+      invalidPassword: false
     }
   },
   methods: {
     async submitLogin () {
+      this.checkField();
       alert(this.username + this.password)
+      
+    },
+    async checkField () {
+      this.invalidUsername = this.username === "" ? true : false ;
+      this.invalidPassword = this.password === "" ? true : false ;
     },
     async toggleModalLogin () {
       this.$emit("toggle-modal-login");
