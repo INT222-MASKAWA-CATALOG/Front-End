@@ -34,6 +34,7 @@ module.exports = {
       footer: "#EDE734",
       sky: "#6FCDEB",
       orange: "#F99928",
+      buttonGreen: "#10B982",
     },
     spacing: {
       px: '1px',
