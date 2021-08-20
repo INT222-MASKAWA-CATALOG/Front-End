@@ -20,12 +20,12 @@
   <!-- End Navigation Bar -->
 
   <!-- Start Login Modal -->
-  <login v-if="showModalLogin" @toggle-modal-login="toggleModalLogin" />
+  <login v-if="showModalLogin" @toggle-modal-login="toggleModalLogin" @switch-modal-login-register="switchModalLoginRegister" />
   <div v-if="showModalLogin" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
   <!-- End Login Modal -->
 
     <!-- Start Register Modal -->
-  <register v-if="showModalRegister" @toggle-modal-register="toggleModalRegister" />
+  <register v-if="showModalRegister" @toggle-modal-register="toggleModalRegister" @switch-modal-login-register="switchModalLoginRegister" />
   <div v-if="showModalRegister" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
   <!-- End Register Modal -->
 
@@ -56,6 +56,10 @@ export default {
       this.showModalLogin = !this.showModalLogin;
     },
     async toggleModalRegister () {
+      this.showModalRegister = !this.showModalRegister;
+    },
+    async switchModalLoginRegister() {
+      this.showModalLogin = !this.showModalLogin;
       this.showModalRegister = !this.showModalRegister;
     }
   }

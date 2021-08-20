@@ -47,7 +47,7 @@
         </form>
         <div class="pb-12 text-sm text-gray-300 font-light">
           Already have an account? 
-          <button class="select-none text-orange hover:text-green-600" v-on:click="toLogin()">
+          <button class="select-none text-orange hover:text-green-600" v-on:click="switchModalLoginRegister()">
             Login
           </button>
         </div>
@@ -90,8 +90,8 @@ export default {
     async toggleModalRegister () {
       this.$emit("toggle-modal-register");
     },
-    async toLogin() {
-      alert("Login")
+    async switchModalLoginRegister() {
+      this.$emit("switch-modal-login-register");
     }
   }
 }
