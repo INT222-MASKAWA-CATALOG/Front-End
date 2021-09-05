@@ -16,16 +16,13 @@
         </div>
         <div id="Brand" class="flex flex-col">
           <label for="brand" class="">Brand</label>
-          <select name="brand" id="brand" v-model="brand" class="rounded-md focus:outline-none py-1 px-2 shadow-md">
-            <option value="A">A</option>
-            <option value="B">B</option>
-          </select>
         </div>
         <div id="Size" class="row-span-3 flex flex-col">
           <label for="size" class="">Size</label>
         </div>
         <div id="Gender" class="flex flex-col">
           <label for="gender" class="">Gender</label>
+          <Multiselect id="gender" v-model="gender" :options="{men: 'MEN',women: 'WOMEN'}" class="rounded-md focus:outline-none py-1 px-2 shadow-md select-none" mode="multiple" />
         </div>
         <div id="Shoes" class="flex flex-col">
           <label id="shoes" class="">Shoes</label>
@@ -42,11 +39,15 @@
   </form>
 </template>
 
+<style src="@vueform/multiselect/themes/default.css"></style>
+
 <script>
 import NavBar from "../components/NavBar.vue";
+import Multiselect from '@vueform/multiselect';
 export default {
   components: {
     NavBar,
+    Multiselect,
   },
   data() {
     return {
@@ -54,7 +55,7 @@ export default {
       price: 0,
       brand: "",
       color: "",
-      gender: "",
+      gender: [],
       size: "",
       shoes: "",
       description: "",
@@ -62,7 +63,7 @@ export default {
   },
   methods: {
     submitForm () {
-      alert(this.brand)
+      alert(this.gender)
     }
   },
 };
