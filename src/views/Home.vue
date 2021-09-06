@@ -1,6 +1,7 @@
 <template>
     <nav-bar head="MASKAWA" />
-    <carousel />
+    <p class="text-gray-300 text-xl font-light my-3">Get Ready for the MASKAWA</p>
+    <carousel class="" />
 </template>
 
 <script>
