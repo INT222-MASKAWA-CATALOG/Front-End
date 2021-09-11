@@ -5,6 +5,8 @@
       <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       <button class="" v-on:click="toggleModalRegister()">Register</button>
     </div>
+
+    <!-- flex style -->
     <!-- <div class="flex shadow-md">
       <div class="mr-auto justify-center"><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16"></router-link></div>
       <div class="self-center text-xl select-none justify-center">{{ head }}</div>
@@ -16,6 +18,8 @@
         <i class="ri-bookmark-3-fill text-3xl"></i>
       </div>
     </div> -->
+
+    <!-- grid style -->
     <div class="grid grid-cols-3 shadow-md">
       <div class="mr-auto justify-center"><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16"></router-link></div>
       <div class="self-center text-xl select-none justify-center">{{ head }}</div>
