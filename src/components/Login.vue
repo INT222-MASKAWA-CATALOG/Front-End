@@ -28,7 +28,7 @@
             <button type="submit" class="bg-yellowPastel py-4 w-full rounded-lg font-semibold">LOGIN</button>
           </div>
         </form>
-        <div class="pb-12 text-sm text-gray-300">
+        <div class="pb-12 text-sm text-gray-300 text-center">
           Don’t have an account? 
           <button class="select-none text-sky border-sky border-b-4 hover:text-blue-700 hover:border-blue-700" v-on:click="switchModalLoginRegister()">
             Register
@@ -37,7 +37,6 @@
       </div>
     </div>
   </div>
-    
 </template>
 
 <script>

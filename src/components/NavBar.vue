@@ -22,7 +22,7 @@
     <!-- grid style -->
     <div class="grid grid-cols-3 shadow-md">
       <div class="mr-auto justify-center"><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16"></router-link></div>
-      <div class="self-center text-xl select-none justify-center">{{ head }}</div>
+      <div class="self-center text-xl select-none justify-center text-center">{{ head }}</div>
       <div class="self-center flex pr-7 ml-auto justify-center">
         <div class="border bg-gray-200 rounded-full p-1 mx-1">
           <i class="ri-search-line text-lg"></i>&nbsp;&nbsp;
