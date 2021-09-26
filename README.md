@@ -1,4 +1,4 @@
-# maskawa
+# MASKAWA
 ```
 Front-End หลัก ๆ จะใช้ Vue Router ในการทำ Single Page Application (SPA) 
 และใช้ Tailwind.css ในการช่วยเสริมเรื่องของการจัด layout ต่าง ๆ 
