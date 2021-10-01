@@ -123,8 +123,6 @@
 	</form>
 </template>
 
-<style src="@vueform/multiselect/themes/default.css"></style>
-
 <script>
 import NavBar from "../components/NavBar.vue";
 export default {
@@ -191,7 +189,7 @@ export default {
       }
 			console.log(product)
 
-			/*let formData = new FormData();
+			let formData = new FormData();
 			let productJson = JSON.stringify(product);
 
 			fetch(`${this.addProductDataLink}`, {
@@ -208,7 +206,7 @@ export default {
 				method: "POST",
 				body: formData,
 			});
-*/
+
 			this.$router.push("/home");
 		},
 		uploadImage (event) {
