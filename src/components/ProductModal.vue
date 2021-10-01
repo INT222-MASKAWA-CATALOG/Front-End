@@ -27,7 +27,7 @@
 								<div class="max-w-xss border my-1 w-28">
 									<img :src="`http://localhost:3000/Files/${s.logo}`" class="h-7 mx-auto"/>
 								</div>
-								<span class="text-lg">฿ {{ s.price }}</span>
+								<span class="text-lg">THB {{ s.price }}</span>
 								<div class="border border-black rounded px-2 py-1 shadow-md">
 									<a :href="`${s.productlink}`" >ไปที่ร้านค้า</a>
 								</div>

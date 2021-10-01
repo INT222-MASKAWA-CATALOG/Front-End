@@ -35,6 +35,7 @@ module.exports = {
       sky: "#6FCDEB",
       orange: "#F99928",
       buttonGreen: "#10B982",
+      yellowCream: "#FFE12B",
     },
     spacing: {
       px: '1px',
