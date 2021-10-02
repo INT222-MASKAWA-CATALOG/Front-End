@@ -33,6 +33,8 @@
 								</div>
 							</div>
 							<!-- Online Shop -->
+							
+							<button @click="toggleAddLink(e.productid)" class="text-left">+Add Link</button>
 
 							<!-- Description -->
 							<span class="text-xl">PRODUCT OVERVIEW</span>
@@ -47,11 +49,17 @@
 			<!--content-->
 		</div>
 	</div>
+	<div v-show="showOnlineshopModal">
+		<add-onlineshop-modal :id="toggleId"/>
+		<div class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+	</div>
 </template>
 
 <script>
+import AddOnlineshopModal from "../components/AddOnlineshopModal.vue";
+
 export default {
-	components: {},
+	components: { AddOnlineshopModal, },
 	props: {
 		e: {
 			type: Object,
@@ -59,11 +67,18 @@ export default {
 		}
 	},
 	data() {
-		return {};
+		return {
+			showOnlineshopModal: false,
+			toggleId: 0
+		};
 	},
 	methods: {
 		async close () {
 			this.$emit("close-product-modal");
+		},
+		async toggleAddLink (id) {
+			this.showOnlineshopModal = !this.showOnlineshopModal;
+			this.toggleId = id;
 		},
 	},
 };

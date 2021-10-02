@@ -16,7 +16,7 @@
 							<div id="preview" v-else>
 								<img :src="imageshow" class="object-cover object-top w-auto max-h-96 mx-auto"/>
 							</div>
-							<input id="file-input" type="file" class="hidden" @change="uploadPhoto($event)" />
+							<input id="image" type="file" class="hidden" @change="uploadPhoto($event)" />
 						</label>
 					</div>
 					<p v-if="invalidImage" class="text-red-500 text-sm text-left italic">** Please enter Image! **</p>
@@ -125,6 +125,7 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
+
 export default {
 	components: {
 		NavBar,
@@ -137,6 +138,7 @@ export default {
 			colors: [],
 			addProductDataLink: "http://localhost:3000/addProduct",
 			uploadImageLink: "http://localhost:3000/uploadImage",
+
 			productname: "",
 			saledate: null,
 			description: "",
@@ -188,6 +190,7 @@ export default {
         }
       }
 			console.log(product)
+			console.log("Success first step")
 
 			let formData = new FormData();
 			let productJson = JSON.stringify(product);

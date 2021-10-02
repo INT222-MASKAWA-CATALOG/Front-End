@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       productlink: "http://localhost:3000/product",
-      onlinelink:"http://localhost:3000/onlineshop",
       products: [],
       eachProduct: [],
       toggleId: 0,
