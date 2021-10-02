@@ -104,12 +104,12 @@ export default {
 			shops: [],
 			shop: [],
 			shopSelect: [],
-			shopLink:"http://13.67.90.93:3000/shop",
+			shopLink:"http://172.18.0.3:3000/shop",
 			price: 0,
 			invalidPrice: false,
 			link: "",
 			invalidLink: false,
-			addOnlineLink: "http://13.67.90.93:3000/addOnlineshop",
+			addOnlineLink: "http://172.18.0.3:3000/addOnlineshop",
 		};
 		
 	},
