@@ -132,12 +132,12 @@ export default {
 	},
 	data() {
 		return {
-			brandlink: "http://172.18.0.3:3000/brand",
+			brandlink: "http://13.67.90.93:3000/brand",
 			brands: [],
-			colorlink: "http://172.18.0.3:3000/color",
+			colorlink: "http://13.67.90.93:3000/color",
 			colors: [],
-			addProductDataLink: "http://172.18.0.3:3000/addProduct",
-			uploadImageLink: "http://172.18.0.3:3000/uploadImage",
+			addProductDataLink: "http://13.67.90.93:3000/addProduct",
+			uploadImageLink: "http://13.67.90.93:3000/uploadImage",
 
 			productname: "",
 			saledate: null,
