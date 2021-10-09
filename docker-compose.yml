@@ -1,9 +1,9 @@
 version: "3"
 services:
     frontend:
-        build: 
-         context: .
-        image: frontend
+        # build: 
+        #  context: .
+        image: ghcr.io/skeletonbear/front-end:latest
         container_name: frontend
         ports: 
             - "8080:80"
