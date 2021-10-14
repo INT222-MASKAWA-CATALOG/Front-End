@@ -1,6 +1,6 @@
 <template>
 	<div class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-		<div class="relative max-w-6xl">
+		<div class="relative w-288 h-96">
 			<!--content-->
 			<div class="rounded-3xl bg-white outline-none focus:outline-none">
 				<!--header-->
@@ -12,9 +12,11 @@
 
 				<!--body-->
 				<div class="text-sm flex flex-col">
-					<div class="flex flex-row">
-						<img :src="`http://localhost:3000/Files/${e.image}`" class="object-contain w-full h-96 m-4 mt-0" />
-						<div class="flex flex-col mx-4">
+					<div class="grid grid-cols-8 gap-8">
+						<div class="col-span-3">
+							<img :src="`http://localhost:3000/Files/${e.image}`" class="object-contain w-full h-80 m-4 mt-0" />
+						</div>
+						<div class="flex flex-col mx-4 col-span-5">
 
 							<!-- Product Name -->
 							<span class="text-4xl">{{ e.productname }}</span>
