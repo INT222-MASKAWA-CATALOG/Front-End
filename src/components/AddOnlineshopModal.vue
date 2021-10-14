@@ -130,8 +130,8 @@ export default {
 					productlink: this.link,
 					shopid: this.shop.shopid
 				}
-				console.log(onlineData);
-				// this.addOnline(onlineData)
+				console.log(onlineData)
+				this.addOnline(onlineData)
 			}
 		},
 		async addOnline(data) {
@@ -143,8 +143,7 @@ export default {
 				},
 				body: dataJson,
 			});
-
-			this.$router.push("/home");
+			location.reload();
 		},
 		async fetchShop() {
 			const res = await fetch(this.shopLink);
