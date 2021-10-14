@@ -27,7 +27,7 @@ export default {
 	props: {},
 	data() {
 		return {
-			productlink: "http://13.67.90.93:3000/product",
+			productlink: "http://localhost:3000/product",
 			products: [],
 			eachProduct: [],
 			toggleId: 0,
