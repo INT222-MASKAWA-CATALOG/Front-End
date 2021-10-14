@@ -130,7 +130,7 @@ export default {
 					productlink: this.link,
 					shopid: this.shop.shopid
 				}
-				console.log(onlineData)
+				console.log(onlineData);
 				// this.addOnline(onlineData)
 			}
 		},
