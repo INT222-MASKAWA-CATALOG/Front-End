@@ -5,8 +5,8 @@
 			<div class="rounded-3xl h-60 bg-white outline-none focus:outline-none p-4">
 				<!--header-->
 				<div class="flex flex-col items-start justify-between">
-					<!-- Close Icon
-					<button class="ri-close-line p-1 ml-auto text-black float-right text-3xl font-semibold" v-on:click="close()" /> -->
+					<!-- Close Icon -->
+					<button class="ri-close-line p-1 ml-auto text-black float-right text-3xl font-semibold" v-on:click="close()" />
 					<form @submit.prevent="submitadd" class="flex">
 						<label for="shop" class="uppercase my-auto">Shop</label>
 						<select
@@ -150,6 +150,9 @@ export default {
 			const data = await res.json();
 			return data;
 		},
+		close() {
+			this.$emit('close-add-online')
+		}
 	},
 	async created() {
 		this.shops = await this.fetchShop();

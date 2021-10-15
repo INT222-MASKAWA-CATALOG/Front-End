@@ -52,7 +52,7 @@
 		</div>
 	</div>
 	<div v-show="showOnlineshopModal">
-		<add-onlineshop-modal :id="toggleId"/>
+		<add-onlineshop-modal :id="toggleId" @close-add-online="closeAddOnline"/>
 		<div class="opacity-25 fixed inset-0 z-40 bg-black"></div>
 	</div>
 </template>
@@ -77,6 +77,9 @@ export default {
 	methods: {
 		async close () {
 			this.$emit("close-product-modal");
+		},
+		async closeAddOnline () {
+			this.showOnlineshopModal = !this.showOnlineshopModal;
 		},
 		async toggleAddLink (id) {
 			this.showOnlineshopModal = !this.showOnlineshopModal;
