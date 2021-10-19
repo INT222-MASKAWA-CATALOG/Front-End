@@ -27,6 +27,7 @@
 			</select>
 		</div>
 		<div @click="clearFilterBrand()" class="ri-filter-off-line text-2xl my-auto ml-2"/>
+
 		<div id="colorFilter" class="ml-8">
 			<select name="color" v-model="inputColor" class="rounded-md focus:outline-none p-2 shadow-md w-32">
 				<option value="" class="uppercase" disabled hidden selected>Color</option>
@@ -36,12 +37,13 @@
 			</select>
 		</div>
 		<div @click="clearFilterColor()" class="ri-filter-off-line text-2xl my-auto ml-2"/>
+		
 		<div id="search" class="bg-gray-200 p-2 w-min ml-auto rounded-lg flex select-none">
 			<input type="text" v-model="inputName" placeholder="Search ..." class="bg-gray-200 focus:outline-none">
 			<i class="ri-search-line"/>
 		</div>
 	</div>
-	<!-- Search -->
+	<!-- Filter & Search -->
 
 	<!-- Product -->
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
