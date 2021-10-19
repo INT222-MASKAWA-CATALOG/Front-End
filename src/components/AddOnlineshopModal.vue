@@ -59,6 +59,9 @@ export default {
 			require: true,
 		},
 	},
+	emits: [
+		"close-add-online"
+	],
 	data() {
 		return {
 			shops: [],

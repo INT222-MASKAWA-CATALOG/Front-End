@@ -68,6 +68,9 @@ export default {
 			require: true,
 		}
 	},
+	emits: [
+		"close-product-modal"
+	],
 	data() {
 		return {
 			showOnlineshopModal: false,
