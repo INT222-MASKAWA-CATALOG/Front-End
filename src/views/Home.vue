@@ -1,7 +1,20 @@
 <template>
 	<nav-bar head="MASKAWA" />
 	<p class="text-gray-300 text-xl font-light my-3 text-center select-none">Get Ready for the MASKAWA</p>
-	<carousel class="text-3xl mx-8 text-center" />
+
+	<!-- Carousel -->
+	<carousel class="story-carousel story-carousel--colors text-3xl mx-8 text-center">
+    <slide class="story-carousel__slide">
+      <img src="../assets/slide1.png" />
+    </slide>
+    <slide class="story-carousel__slide">
+      <img src="../assets/slide2.png" />
+    </slide>
+    <slide class="story-carousel__slide">
+      <img src="../assets/slide3.png" />
+    </slide>
+  </carousel>
+	<!-- Carousel -->
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
 		<card-product v-for="product in products" :key="product.productid" :p="product" v-on:click="toggleProductModal(product.productid)"/>
 	</div>
@@ -13,14 +26,18 @@
 </template>
 
 <script>
+import { Carousel, Slide } from 'vue-snap'
+import 'vue-snap/dist/vue-snap.css'
+
 import NavBar from "../components/NavBar.vue";
-import Carousel from "../components/Carousel.vue";
 import CardProduct from "../components/CardProduct.vue";
 import ProductModal from "../components/ProductModal.vue";
 export default {
 	components: {
-		NavBar,
 		Carousel,
+		Slide,
+		
+		NavBar,
 		CardProduct,
 		ProductModal,
 	},
