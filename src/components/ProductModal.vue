@@ -14,7 +14,7 @@
 				<div class="text-sm flex flex-col">
 					<div class="grid grid-cols-8 gap-8">
 						<div class="col-span-3">
-							<img :src="`http://localhost:3000/Files/${e.image}`" class="object-contain w-full h-80 m-4 mt-0" />
+							<img :src="`http://13.67.90.93:3000/Files/${e.image}`" class="object-contain w-full h-80 m-4 mt-0" />
 						</div>
 						<div class="flex flex-col mx-4 col-span-5">
 
@@ -27,7 +27,7 @@
 							<!-- Online Shop -->
 							<div v-for="s in e.onlineshop" :key="s.onlineid" class="flex items-center gap-4">
 								<div class="max-w-xss border my-1 w-28">
-									<img :src="`http://localhost:3000/Files/${s.logo}`" class="h-7 mx-auto"/>
+									<img :src="`http://13.67.90.93:3000/Files/${s.logo}`" class="h-7 mx-auto"/>
 								</div>
 								<span class="text-lg">THB {{ s.price }}</span>
 								<div class="border border-black rounded px-2 py-1 shadow-md">
@@ -36,8 +36,6 @@
 							</div>
 							<!-- Online Shop -->
 							
-							<button @click="toggleAddLink(e.productid)" class="text-left">+Add Link</button>
-
 							<!-- Description -->
 							<span class="text-xl">PRODUCT OVERVIEW</span>
 							<span class="text-sm text-justify">{{ e.description }}</span>
@@ -51,17 +49,15 @@
 			<!--content-->
 		</div>
 	</div>
-	<div v-show="showOnlineshopModal">
-		<add-onlineshop-modal :id="toggleId" @close-add-online="closeAddOnline"/>
-		<div class="opacity-25 fixed inset-0 z-40 bg-black"></div>
-	</div>
 </template>
 
 <script>
-import AddOnlineshopModal from "../components/AddOnlineshopModal.vue";
+
 
 export default {
-	components: { AddOnlineshopModal, },
+	components: { 
+
+		},
 	props: {
 		e: {
 			type: Object,
@@ -73,20 +69,12 @@ export default {
 	],
 	data() {
 		return {
-			showOnlineshopModal: false,
-			toggleId: 0
+
 		};
 	},
 	methods: {
 		async close () {
 			this.$emit("close-product-modal");
-		},
-		async closeAddOnline () {
-			this.showOnlineshopModal = !this.showOnlineshopModal;
-		},
-		async toggleAddLink (id) {
-			this.showOnlineshopModal = !this.showOnlineshopModal;
-			this.toggleId = id;
 		},
 	},
 };

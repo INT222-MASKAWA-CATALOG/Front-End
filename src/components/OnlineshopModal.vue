@@ -7,7 +7,7 @@
 				<div class="flex flex-col items-start justify-between">
 					<!-- Close Icon -->
 					<button class="ri-close-line p-1 ml-auto text-black float-right text-3xl font-semibold" v-on:click="close()"/>
-					<form @submit.prevent="submitadd" class="flex">
+					<!-- <form @submit.prevent="submitadd" class="flex">
 						<label for="shop" class="uppercase my-auto">Shop</label>
 						<select name="shop" v-model="shop" class="rounded-md focus:outline-none py-1 px-2 shadow-md mx-4 border-2 border-black">
 							<option v-for="s in shops" :key="s.shopid" :value="s">
@@ -19,12 +19,12 @@
 								<i class="ri-add-line text-base align-middle"></i> ADD
 							</button>
 						</div>
-					</form>
+					</form> -->
 				</div>
 				<!--header-->
 
 				<!--body-->
-				<form @submit.prevent="submitLink" class="my-4">
+				<!-- <form @submit.prevent="submitLink" class="my-4">
 					<div v-for="ss in shopSelect" :key="ss.shopid" class="grid grid-cols-3">
 						<div>{{ ss.shopname }}</div>
 						<div>
@@ -41,7 +41,15 @@
 							<i class="ri-save-3-line text-base align-middle"></i> SAVE
 						</button>
 					</div>
-				</form>
+				</form> -->
+				<div v-for="o in onlineshop" :key="o.onlineid" class="flex items-center gap-4">
+					<div class="">{{ o.shopname }}</div>
+					<div class="">{{ o.price }}</div>
+					<div class="flex ml-auto select-none">
+						<div class="ri-pencil-fill mr-4 hover:text-green-500" />
+						<div class="ri-delete-bin-fill hover:text-red-500" @click="deleteOnline(o)" />
+					</div>
+				</div>
 				<!--body-->
 			</div>
 			<!--content-->
@@ -58,6 +66,10 @@ export default {
 			type: Number,
 			require: true,
 		},
+		onlineshop: {
+			type: Array,
+			require: true,
+		},
 	},
 	emits: [
 		"close-add-online"
@@ -65,59 +77,19 @@ export default {
 	data() {
 		return {
 			shops: [],
-			shop: [],
-			shopSelect: [],
-			shopLink: "http://localhost:3000/shop",
+			shopLink: "http://13.67.90.93:3000/shop",
 			price: 0,
-			invalidPrice: false,
 			link: "",
+			invalidPrice: false,
 			invalidLink: false,
-			addOnlineLink: "http://localhost:3000/addonlineshop",
+			addOnlineLink: "http://13.67.90.93:3000/addonlineshop",
 		};
 	},
 	methods: {
-		submitadd() {
-			console.log(this.shop);
-			this.shopSelect.push(this.shop);
-		},
-		submitLink() {
-			this.invalidPrice = this.price === 0 ? true : false;
-			this.invalidLink = this.link === "" ? true : false;
-
-			let checkForm = this.price !== 0 && this.link !== "";
-			if (checkForm) {
-				let onlineData = {
-					productid: this.id,
-					price: this.price,
-					productlink: this.link,
-					shopid: this.shop.shopid,
-				};
-				console.log(onlineData);
-				this.addOnline(onlineData);
-			}
-		},
-		async addOnline(data) {
-			let dataJson = JSON.stringify(data);
-			fetch(`${this.addOnlineLink}`, {
-				method: "POST",
-				headers: {
-					"Content-type": "application/json",
-				},
-				body: dataJson,
-			});
-			location.reload();
-		},
-		async fetchShop() {
-			const res = await fetch(this.shopLink);
-			const data = await res.json();
-			return data;
-		},
-		close() {
-			this.$emit("close-add-online");
-		},
+		
 	},
 	async created() {
-		this.shops = await this.fetchShop();
+
 	},
 };
 </script>
