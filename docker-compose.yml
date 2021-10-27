@@ -6,7 +6,7 @@ services:
         image: ghcr.io/skeletonbear/front-end:latest
         container_name: frontend
         ports: 
-            - "8080:80"
+            - "80:80"
         networks:
             - intregrated-network
 networks:
