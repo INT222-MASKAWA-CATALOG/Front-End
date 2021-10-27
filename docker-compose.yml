@@ -7,11 +7,7 @@ services:
         #     - "80:80"
         networks:
             - intregrated-network:
-                ipv4_address: 172.18.0.4
 
 networks:
-    default:
-        external:
-            name: intregrated-network
     intregrated-network:
        external: true
