@@ -210,13 +210,13 @@ export default {
 
 		/* ==================== Filter Data Zone ==================== */
 		filterBySearch(product) {
-			return product.filter(p => p.productname.includes(this.inputSearchProduct))
+			return product.filter(p => p.productname.toLowerCase().includes(this.inputSearchProduct.toLowerCase()))
 		},
 		filterByBrand(brand) {
-			return brand.filter(b => b.brandname.includes(this.inputSearchBrand))
+			return brand.filter(b => b.brandname.toLowerCase().includes(this.inputSearchBrand.toLowerCase()))
 		},
 		filterByColor(color) {
-			return color.filter(c => c.colorname.includes(this.inputSearchColor))
+			return color.filter(c => c.colorname.toLowerCase().includes(this.inputSearchColor.toLowerCase()))
 		},
 		/* ==================== Filter Data Zone ==================== */
 

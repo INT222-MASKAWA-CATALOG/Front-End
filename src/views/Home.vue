@@ -143,13 +143,13 @@ export default {
 
 		/* ==================== Filter Data Zone ==================== */
 		filterBySearch(product) {
-			return product.filter(p => p.productname.includes(this.inputName))
+			return product.filter(p => p.productname.toLowerCase().includes(this.inputName.toLowerCase()))
 		},
 		filterByBrand(product) {
-			return product.filter(p => p.brandname.includes(this.inputBrand))
+			return product.filter(p => p.brandname.toLowerCase().includes(this.inputBrand.toLowerCase()))
 		},
 		filterByColor(product) {
-			return product.filter(p => p.colorname.includes(this.inputColor))
+			return product.filter(p => p.colorname.toLowerCase().includes(this.inputColor.toLowerCase()))
 		},
 		filterShow() {
 			return this.filterBySearch(this.filterByBrand(this.filterByColor(this.products)))
