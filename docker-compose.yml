@@ -6,7 +6,7 @@ services:
         # ports: 
         #     - "80:80"
         networks:
-            - intregrated-network:
+            - intregrated-network
 
 networks:
     intregrated-network:
