@@ -130,29 +130,29 @@ export default {
 		toggleOnlineshop: '',
 
 		/* Member */
-		memberlink: "http://13.67.90.93/backend/member",
+		memberlink: "http://localhost:3000/member",
 		members: [],
 		/* Member */
 
 		/* Brand */
-		brandlink: "http://13.67.90.93/backend/brand",
+		brandlink: "http://localhost:3000/brand",
 		brands: [],
 		inputSearchBrand: '',
 		/* Brand */
 
 		/* Color */
-		colorlink: "http://13.67.90.93/backend/color",
+		colorlink: "http://localhost:3000/color",
 		colors: [],
 		inputSearchColor: '',
 		/* Color */
 
 		/* Product */
-		productlink: "http://13.67.90.93/backend/product",
+		productlink: "http://localhost:3000/product",
 		products: [],
 		inputSearchProduct: '',
 		/* Product */
 
-		delfile: "http://13.67.90.93/backend/deleteFile",
+		delfile: "http://localhost:3000/deleteFile",
 		showConfirm: false,
 		deleteConfirmProduct: [],
 

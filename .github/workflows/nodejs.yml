@@ -2,8 +2,8 @@ name: CICD Node Js
 on:
   push:
     branches:
-      - master
-      # - dev
+      # - master
+      - dev
 jobs:
   build:
     runs-on: ubuntu-20.04

@@ -77,12 +77,12 @@ export default {
 	data() {
 		return {
 			shops: [],
-			shopLink: "http://13.67.90.93/backend/shop",
+			shopLink: "http://localhost:3000/shop",
 			price: 0,
 			link: "",
 			invalidPrice: false,
 			invalidLink: false,
-			addOnlineLink: "http://13.67.90.93/backend/addonlineshop",
+			addOnlineLink: "http://localhost:3000/addonlineshop",
 		};
 	},
 	methods: {
