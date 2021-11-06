@@ -24,16 +24,16 @@
 		</div>
 	</div>
 	
-	<!-- <status-method :status="status" /> -->
+	<status-method v-if="this.showStatus" :status="status" />
 </template>
 
 <script>
 
-// import StatusMethod from "./StatusMethod.vue"
+import StatusMethod from "./StatusMethod.vue"
 
 export default {
 	components: {
-		// StatusMethod
+		StatusMethod
 	},
 	props: [
 		"p",
@@ -42,7 +42,8 @@ export default {
 	],
 	data() {
 		return {
-			status: 0
+			status: 0,
+			showStatus: false,
 		};
 		
 	},
@@ -52,11 +53,11 @@ export default {
 		},
 		async confirm(p) {
 			console.log(p.productid)
-			// await fetch(`${this.productlink}/${p.productid}`,{method: "DELETE"})
-			// await fetch(`${this.delfile}/${p.image}`,{method: "DELETE"})
-			// if (true) {
-				
-			// }
+			const res = await fetch(`${this.productlink}/${p.productid}`,{method: "DELETE"})
+			if (res.ok) {
+				this.status = 1
+				this.showStatus = true
+			}
 		},
 	},
 	async created() {

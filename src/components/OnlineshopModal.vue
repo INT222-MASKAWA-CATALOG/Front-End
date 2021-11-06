@@ -1,6 +1,6 @@
 <template>
 	<div class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-		<div class="relative max-w-6xl w-11/12">
+		<div class="relative w-112 max-w-md">
 			<!--content-->
 			<div class="rounded-3xl h-60 bg-white outline-none focus:outline-none p-4">
 				<!--header-->
@@ -42,13 +42,16 @@
 						</button>
 					</div>
 				</form> -->
-				<div v-for="o in onlineshop" :key="o.onlineid" class="flex items-center gap-4">
-					<div class="">{{ o.shopname }}</div>
-					<div class="">{{ o.price }}</div>
-					<div class="flex ml-auto select-none">
+				<div v-for="o in onlineshop" :key="o.onlineid" class="items-center grid grid-cols-12 gap-4">
+					<div class="col-span-5">{{ o.shopname }}</div>
+					<div class="col-span-2">{{ o.price }}</div>
+					<div class="flex ml-auto select-none col-span-5">
 						<div class="ri-pencil-fill mr-4 hover:text-green-500" />
 						<div class="ri-delete-bin-fill hover:text-red-500" @click="deleteOnline(o)" />
 					</div>
+				</div>
+				<div class="">
+
 				</div>
 				<!--body-->
 			</div>
@@ -86,7 +89,9 @@ export default {
 		};
 	},
 	methods: {
-		
+		async close () {
+			this.$emit("close-add-online");
+		},
 	},
 	async created() {
 

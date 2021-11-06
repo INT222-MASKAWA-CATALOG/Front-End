@@ -12,8 +12,8 @@
 
 				<!--body-->
 				<div class="">
-					<div class="ri-check-fill mx-auto text-8xl text-white bg-green-500 rounded-full w-28 p-2 text-center" />
-					<div class="ri-close-fill mx-auto text-8xl text-white bg-red-500 rounded-full w-28 p-2 text-center" />
+					<div v-if="this.status == 1" class="ri-check-fill mx-auto my-16 text-8xl text-white bg-green-500 rounded-full w-28 p-2 text-center" />
+					<div v-if="this.status == 0" class="ri-close-fill mx-auto my-16 text-8xl text-white bg-red-500 rounded-full w-28 p-2 text-center" />
 				</div>
 				<!--body-->
 			</div>
