@@ -15,7 +15,7 @@
 						<div class="ri-delete-bin-fill mx-auto text-8xl text-white bg-red-500 rounded-full w-28 p-2 text-center" />
 						<div class="text-center my-5">
 							<button @click="cancel()" class="border-2 border-gray-400 mr-2 px-2 shadow-md rounded-md">Cancel</button>
-							<button @click="confirm(this.p)" class=" mx-2 bg-red-400 px-2 border-2 border-red-500 shadow-md rounded-md">Delete</button>
+							<button @click="confirm()" class=" mx-2 bg-red-400 px-2 border-2 border-red-500 shadow-md rounded-md">Delete</button>
 						</div>
 				</div>
 				<!--body-->
@@ -36,9 +36,8 @@ export default {
 		StatusMethod
 	},
 	props: [
-		"p",
-		"productlink",
-		"delfile"
+		"path",
+		"datalink",
 	],
 	data() {
 		return {
@@ -51,9 +50,8 @@ export default {
 		async cancel() {
 			this.$emit('cancel')
 		},
-		async confirm(p) {
-			console.log(p.productid)
-			const res = await fetch(`${this.productlink}/${p.productid}`,{method: "DELETE"})
+		async confirm() {
+			const res = await fetch(`${this.datalink}/${this.path}`,{method: "DELETE"})
 			if (res.ok) {
 				this.status = 1
 				this.showStatus = true

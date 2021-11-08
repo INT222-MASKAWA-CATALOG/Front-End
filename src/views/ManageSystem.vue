@@ -104,7 +104,7 @@
 		<!-- Manage Product -->
 		
 		<div v-if="showConfirm">
-			<confirm-delete :p="deleteConfirmProduct" :productlink="productlink" :delfile="delfile" @cancel="this.showConfirm = false"/>
+			<confirm-delete :datalink="datalink" :path="path" @cancel="this.showConfirm = false"/>
 			<div class="opacity-25 fixed inset-0 z-40 bg-black" />
 		</div>
 	</div>
@@ -152,9 +152,9 @@ export default {
 		inputSearchProduct: '',
 		/* Product */
 
-		delfile: "http://localhost:3000/deleteFile",
 		showConfirm: false,
-		deleteConfirmProduct: [],
+		datalink: "",
+		path: "",
 
 	}
 	},
@@ -197,13 +197,20 @@ export default {
 		},
 		async deleteBrand(b) {
 			console.log(b)
+			this.datalink = this.brandlink
+			this.path = b.brandid
+			this.showConfirm = !this.showConfirm
 		},
 		async deleteColor(c) {
 			console.log(c)
+			this.datalink = this.colorlink
+			this.path = c.colorid
+			this.showConfirm = !this.showConfirm
 		},
 		async deleteProduct(p) {
 			console.log(p)
-			this.deleteConfirmProduct = p;
+			this.datalink = this.productlink
+			this.path = p.productid
 			this.showConfirm = !this.showConfirm
 		},
 		/* ==================== Delete Zone ==================== */
