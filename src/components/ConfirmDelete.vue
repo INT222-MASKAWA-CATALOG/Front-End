@@ -56,6 +56,7 @@ export default {
 				this.status = 1
 				this.showStatus = true
 			}
+			setTimeout( () => location.reload(), 2000);
 		},
 	},
 	async created() {

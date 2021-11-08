@@ -129,8 +129,8 @@
 						<button type="submit" class="bg-yellowPastel py-2 w-full rounded-lg font-medium">REGISTER</button>
 					</div>
 				</form>
-				<div class="pb-12 text-sm text-gray-300 font-light text-center">
-					Already have an account? 
+				<div class="pb-12 text-sm text-gray-300 text-center">
+					Already have an account?
 					<button class="select-none text-orange hover:text-green-600" v-on:click="switchModalLoginRegister()">
 						Login
 					</button>
@@ -201,7 +201,6 @@ export default {
 		},
 		async submitRegister () {
 			this.checkRegister();
-			alert(this.username + this.password + this.gender)
 		},
 		/* Register Zone */
 

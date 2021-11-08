@@ -210,7 +210,7 @@ export default {
 				body: formData,
 			});
 
-			this.$router.push("/home");
+			this.$router.push("/managesys");
 		},
 		uploadImage (event) {
 			var input = event.target;
