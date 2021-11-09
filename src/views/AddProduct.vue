@@ -121,14 +121,18 @@
 			<!-- Right Side -->
 		</div>
 	</form>
+
+	<status-method v-if="this.showStatus" :status="status" />
 </template>
 
 <script>
 import NavBar from "../components/NavBar.vue";
+import StatusMethod from "../components/StatusMethod.vue"
 
 export default {
 	components: {
 		NavBar,
+		StatusMethod,
 	},
 	data() {
 		return {
@@ -136,8 +140,10 @@ export default {
 			brands: [],
 			colorlink: "http://localhost:3000/color",
 			colors: [],
-			addProductDataLink: "http://localhost:3000/addProduct",
-			uploadImageLink: "http://localhost:3000/uploadImage",
+
+			addProductWithImage: "http://localhost:3000/addProductWithImage",
+			status: 0,
+			showStatus: false,
 
 			productname: "",
 			saledate: null,
@@ -146,6 +152,7 @@ export default {
 			imageshow: '',
 			brandid: 0,
 			colorid: 0,
+
 			invalidProductname: false,
 			invalidSaledate: false,
 			invalidDescription: false,
@@ -193,22 +200,19 @@ export default {
 			console.log("Success first step")
 
 			let formData = new FormData();
-			let productJson = JSON.stringify(product);
 
-			fetch(`${this.addProductDataLink}`, {
-			method: "POST",
-				headers: {
-					"Content-type": "application/json",
-				},
-				body: productJson,
-			});
-
+			formData.append("product",JSON.stringify(product))
 			formData.append("file", this.image,this.image.name);
 
-			fetch(`${this.uploadImageLink}`, {
+			const res = await fetch(this.addProductWithImage,{
 				method: "POST",
-				body: formData,
-			});
+				body: formData
+			})
+
+			if (res.ok) {
+				this.status = 1
+				this.showStatus = true
+			}
 
 			this.$router.push("/managesys");
 		},
