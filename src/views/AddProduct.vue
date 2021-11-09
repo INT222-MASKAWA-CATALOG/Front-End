@@ -212,14 +212,6 @@ export default {
 
 			this.$router.push("/managesys");
 		},
-		uploadImage (event) {
-			var input = event.target;
-			if (input.files) {
-				var reader = new FileReader();
-				this.image = input.files[0];
-				reader.readAsDataURL(input.files[0]);
-			}
-		},
 		async fetchBrands() {
 			const res = await fetch(this.brandlink);
 			const data = await res.json();
