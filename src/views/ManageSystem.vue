@@ -91,7 +91,9 @@
 							<div class="ri-eye-fill mr-0.5" />
 							View Shop
 						</button>
-						<div class="ri-pencil-fill mr-4 hover:text-green-500" />
+						<router-link to="/editproduct">
+							<div class="ri-pencil-fill mr-4 hover:text-green-500" @click="editProduct(p)" />
+						</router-link>
 						<div class="ri-delete-bin-fill hover:text-red-500" @click="deleteProduct(p)" />
 					</div>
 				</div>
@@ -188,7 +190,19 @@ export default {
 		/* ==================== Get Data Zone ==================== */
 
 		/* ==================== Update Data Zone ==================== */
-
+		async editMember(m) {
+			console.log(m)
+		},
+		async editBrand(b) {
+			console.log(b)
+		},
+		async editColor(c) {
+			console.log(c)
+		},
+		async editProduct(p) {
+			console.log(p)
+			this.$emit("edit-product",p)
+		},
 		/* ==================== Update Data Zone ==================== */
 
 		/* ==================== Delete Zone ==================== */
