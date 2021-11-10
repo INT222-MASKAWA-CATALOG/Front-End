@@ -201,7 +201,7 @@ export default {
 		},
 		async editProduct(p) {
 			console.log(p)
-			this.$emit("edit-product",p)
+			this.$emit('edit-product',p)
 		},
 		/* ==================== Update Data Zone ==================== */
 
