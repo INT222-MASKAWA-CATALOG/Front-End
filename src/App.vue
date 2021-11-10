@@ -1,5 +1,5 @@
 <template>
-	<router-view />
+	<router-view @edit-product="editProduct" :data-edit-product="dataEditProduct"/>
 </template>
 
 <script>
@@ -8,12 +8,14 @@ export default {
 		},
 		data () {
 			return {
-				
+				dataEditProduct: [],
 			}
 		}
 		,
 		methods: {
-			
+			editProduct(p) {
+				this.dataEditProduct = p
+			}
 		}
 }
 </script>

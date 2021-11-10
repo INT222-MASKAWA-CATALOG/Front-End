@@ -1,5 +1,5 @@
 <template>
-	<nav-bar head="Add Product (Admin Only)" />
+	<nav-bar head="Edit Product (Admin Only)" />
 	<form @submit.prevent="submitForm">
 		<div id="Add Product Field" class="grid grid-cols-2 gap-8 ml-8 mr-16 my-10">
 			<!-- Left Side -->
@@ -14,7 +14,7 @@
 								<p class='uppercase text-sm text-gray-400 group-hover:text-yellowCream pt-1 tracking-wider select-none'>Select a Image</p>
 							</div>
 							<div id="preview" v-else>
-								<img :src="imageshow" class="object-cover object-top w-auto max-h-96 mx-auto"/>
+								<img :src="imageshow" class="object-cover object-top w-auto max-h-96 h-96 mx-auto"/>
 							</div>
 							<input id="image" type="file" class="hidden" @change="uploadPhoto($event)" />
 						</label>
@@ -121,38 +121,34 @@
 			<!-- Right Side -->
 		</div>
 	</form>
-
-	<status-method v-if="this.showStatus" :status="status" />
 </template>
 
 <script>
 import NavBar from "../components/NavBar.vue";
-import StatusMethod from "../components/StatusMethod.vue"
 
 export default {
 	components: {
 		NavBar,
-		StatusMethod,
 	},
+	props: [
+		"dataEditProduct"
+	],
 	data() {
 		return {
 			brandlink: "http://13.76.224.194/backend/brand",
 			brands: [],
 			colorlink: "http://13.76.224.194/backend/color",
 			colors: [],
+			addProductDataLink: "http://13.76.224.194/backend/addProduct",
+			uploadImageLink: "http://13.76.224.194/backend/uploadImage",
 
-			addProductWithImage: "http://13.76.224.194/backend/addProductWithImage",
-			status: 0,
-			showStatus: false,
-
-			productname: "",
-			saledate: null,
-			description: "",
+			productname: this.dataEditProduct.productname,
+			saledate: this.dataEditProduct.saledate,
+			description: this.dataEditProduct.description,
 			image: null,
 			imageshow: '',
-			brandid: 0,
-			colorid: 0,
-
+			brandid: this.dataEditProduct.brandid,
+			colorid: this.dataEditProduct.colorid,
 			invalidProductname: false,
 			invalidSaledate: false,
 			invalidDescription: false,
@@ -162,60 +158,6 @@ export default {
 		};
 	},
 	methods: {
-		submitForm() {
-			this.invalidProductname = this.productname === "" ? true : false;
-			this.invalidSaledate = this.saledate === null ? true : false;
-			this.invalidDescription = this.description === "" ? true : false;
-			this.invalidImage = this.image === null ? true : false;
-			this.invalidBrandid = this.brandid === 0 ? true : false;
-			this.invalidColorid = this.colorid === 0 ? true : false;
-
-			let checkForm = (this.productname !== "" && this.saledate !== null && this.description !== "" && this.images !== null && this.brandid !== 0 && this.colorid !== 0)
-
-			if (checkForm) {
-				let productData = {
-					productname: this.productname,
-					saledate: this.saledate,
-					description: this.description,
-					image: this.image.name,
-					brandid: this.brandid,
-					colorid: this.colorid
-				}
-				this.addProduct(productData);
-			}
-		},
-		async addProduct(product) {
-			var fullPath = document.getElementById("image").value;
-			if (fullPath) {
-				var startIndex =
-					fullPath.indexOf("\\") >= 0
-						? fullPath.lastIndexOf("\\")
-						: fullPath.lastIndexOf("/");
-				var filename = fullPath.substring(startIndex);
-				if (filename.indexOf("\\") === 0 || filename.indexOf("/") === 0) {
-					filename = filename.substring(1);
-				}
-			}
-			console.log(product)
-			console.log("Success first step")
-
-			let formData = new FormData();
-
-			formData.append("product",JSON.stringify(product))
-			formData.append("file", this.image,this.image.name);
-
-			const res = await fetch(this.addProductWithImage,{
-				method: "POST",
-				body: formData
-			})
-
-			if (res.ok) {
-				this.status = 1
-				this.showStatus = true
-			}
-
-			this.$router.push("/managesys");
-		},
 		async fetchBrands() {
 			const res = await fetch(this.brandlink);
 			const data = await res.json();
@@ -239,8 +181,10 @@ export default {
 		},
 	},
 	async created() {
+		this.imageshow = await fetch (`http://13.76.224.194/backend/Files/${this.dataEditProduct.image}`)
 		this.brands = await this.fetchBrands();
 		this.colors = await this.fetchColors();
+		console.log(this.dataEditProduct)
 	},
 };
 </script>
