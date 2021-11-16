@@ -135,12 +135,12 @@ export default {
 	],
 	data() {
 		return {
-			brandlink: "http://13.76.224.194/backend/brand",
+			brandlink: `${process.env.HOST}/brand`,
 			brands: [],
-			colorlink: "http://13.76.224.194/backend/color",
+			colorlink: `${process.env.HOST}/color`,
 			colors: [],
-			addProductDataLink: "http://13.76.224.194/backend/addProduct",
-			uploadImageLink: "http://13.76.224.194/backend/uploadImage",
+			addProductDataLink: `${process.env.HOST}/addProduct`,
+			uploadImageLink: `${process.env.HOST}/uploadImage`,
 
 			productname: this.dataEditProduct.productname,
 			saledate: this.dataEditProduct.saledate,
@@ -181,7 +181,7 @@ export default {
 		},
 	},
 	async created() {
-		this.imageshow = await fetch (`http://13.76.224.194/backend/Files/${this.dataEditProduct.image}`)
+		this.imageshow = await fetch (`${process.env.HOST}/Files/${this.dataEditProduct.image}`)
 		this.brands = await this.fetchBrands();
 		this.colors = await this.fetchColors();
 		console.log(this.dataEditProduct)

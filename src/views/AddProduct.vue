@@ -136,12 +136,12 @@ export default {
 	},
 	data() {
 		return {
-			brandlink: "http://13.76.224.194/backend/brand",
+			brandlink: `${process.env.HOST}/brand`,
 			brands: [],
-			colorlink: "http://13.76.224.194/backend/color",
+			colorlink: `${process.env.HOST}/color`,
 			colors: [],
 
-			addProductWithImage: "http://13.76.224.194/backend/addProductWithImage",
+			addProductWithImage: `${process.env.HOST}/addProductWithImage`,
 			status: 0,
 			showStatus: false,
 

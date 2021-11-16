@@ -80,12 +80,12 @@ export default {
 	data() {
 		return {
 			shops: [],
-			shopLink: "http://13.76.224.194/backend/shop",
+			shopLink: `${process.env.HOST}/shop`,
 			price: 0,
 			link: "",
 			invalidPrice: false,
 			invalidLink: false,
-			addOnlineLink: "http://13.76.224.194/backend/addonlineshop",
+			addOnlineLink: `${process.env.HOST}/addonlineshop`,
 		};
 	},
 	methods: {

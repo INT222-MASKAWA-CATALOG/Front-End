@@ -48,7 +48,7 @@
 	<!-- Product -->
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
 		<div v-for="p in filterShow()" :key="p.productid" v-on:click="toggleProductModal(p.productid)" class="bg-yellowPastel shadow-lg rounded-lg relative">
-		<img :src="`http://13.76.224.194/backend/Files/${p.image}`" class="my-auto mx-auto object-cover w-full h-72" />
+		<img :src="`${process.env.HOST}/Files/${p.image}`" class="my-auto mx-auto object-cover w-full h-72" />
 		<i class="ri-bookmark-line absolute top-2 right-2 text-3xl z-50" />
 		<div class="flex justify-between">
 			<span class="text-xl mx-1">{{ p.productname }}</span>
@@ -82,17 +82,17 @@ export default {
 	data() {
 		return {
 			/* Brand */
-			brandlink: "http://13.76.224.194/backend/brand",
+			brandlink: `${process.env.HOST}/brand`,
 			brands: [],
 			/* Brand */
 
 			/* Color */
-			colorlink: "http://13.76.224.194/backend/color",
+			colorlink: `${process.env.HOST}/color`,
 			colors: [],
 			/* Color */
 
 			/* Product */
-			productlink: "http://13.76.224.194/backend/product",
+			productlink: `${process.env.HOST}/product`,
 			products: [],
 			/* Product */
 			eachProduct: [],
