@@ -132,24 +132,24 @@ export default {
 		toggleOnlineshop: '',
 
 		/* Member */
-		memberlink: `${process.env.HOST}/member`,
+		memberlink: `${process.env.APP_HOST}/member`,
 		members: [],
 		/* Member */
 
 		/* Brand */
-		brandlink: `${process.env.HOST}/brand`,
+		brandlink: `${process.env.APP_HOST}/brand`,
 		brands: [],
 		inputSearchBrand: '',
 		/* Brand */
 
 		/* Color */
-		colorlink: `${process.env.HOST}/color`,
+		colorlink: `${process.env.APP_HOST}/color`,
 		colors: [],
 		inputSearchColor: '',
 		/* Color */
 
 		/* Product */
-		productlink: `${process.env.HOST}/product`,
+		productlink: `${process.env.APP_HOST}/product`,
 		products: [],
 		inputSearchProduct: '',
 		/* Product */
