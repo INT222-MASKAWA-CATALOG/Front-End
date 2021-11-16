@@ -136,12 +136,12 @@ export default {
 	},
 	data() {
 		return {
-			brandlink: `${process.env.MASKAWA_APP_HOST}brand`,
+			brandlink: `${process.env.VUE_APP_MASKAWA_HOST}brand`,
 			brands: [],
-			colorlink: `${process.env.MASKAWA_APP_HOST}color`,
+			colorlink: `${process.env.VUE_APP_MASKAWA_HOST}color`,
 			colors: [],
 
-			addProductWithImage: `${process.env.MASKAWA_APP_HOST}addProductWithImage`,
+			addProductWithImage: `${process.env.VUE_APP_MASKAWA_HOST}addProductWithImage`,
 			status: 0,
 			showStatus: false,
 

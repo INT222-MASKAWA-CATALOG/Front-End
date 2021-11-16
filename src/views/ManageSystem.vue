@@ -132,24 +132,24 @@ export default {
 		toggleOnlineshop: '',
 
 		/* Member */
-		memberlink: `${process.env.MASKAWA_APP_HOST}member`,
+		memberlink: `${process.env.VUE_APP_MASKAWA_HOST}member`,
 		members: [],
 		/* Member */
 
 		/* Brand */
-		brandlink: `${process.env.MASKAWA_APP_HOST}brand`,
+		brandlink: `${process.env.VUE_APP_MASKAWA_HOST}brand`,
 		brands: [],
 		inputSearchBrand: '',
 		/* Brand */
 
 		/* Color */
-		colorlink: `${process.env.MASKAWA_APP_HOST}color`,
+		colorlink: `${process.env.VUE_APP_MASKAWA_HOST}color`,
 		colors: [],
 		inputSearchColor: '',
 		/* Color */
 
 		/* Product */
-		productlink: `${process.env.MASKAWA_APP_HOST}product`,
+		productlink: `${process.env.VUE_APP_MASKAWA_HOST}product`,
 		products: [],
 		inputSearchProduct: '',
 		/* Product */

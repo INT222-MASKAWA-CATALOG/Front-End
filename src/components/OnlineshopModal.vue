@@ -80,12 +80,12 @@ export default {
 	data() {
 		return {
 			shops: [],
-			shopLink: `${process.env.MASKAWA_APP_HOST}shop`,
+			shopLink: `${process.env.VUE_APP_MASKAWA_HOST}shop`,
 			price: 0,
 			link: "",
 			invalidPrice: false,
 			invalidLink: false,
-			addOnlineLink: `${process.env.MASKAWA_APP_HOST}addonlineshop`,
+			addOnlineLink: `${process.env.VUE_APP_MASKAWA_HOST}addonlineshop`,
 		};
 	},
 	methods: {
