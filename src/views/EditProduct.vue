@@ -135,12 +135,12 @@ export default {
 	],
 	data() {
 		return {
-			brandlink: `${process.env.APP_HOST}brand`,
+			brandlink: `${process.env.MASKAWA_APP_HOST}brand`,
 			brands: [],
-			colorlink: `${process.env.APP_HOST}color`,
+			colorlink: `${process.env.MASKAWA_APP_HOST}color`,
 			colors: [],
-			addProductDataLink: `${process.env.APP_HOST}addProduct`,
-			uploadImageLink: `${process.env.APP_HOST}uploadImage`,
+			addProductDataLink: `${process.env.MASKAWA_APP_HOST}addProduct`,
+			uploadImageLink: `${process.env.MASKAWA_APP_HOST}uploadImage`,
 
 			productname: this.dataEditProduct.productname,
 			saledate: this.dataEditProduct.saledate,
@@ -181,7 +181,7 @@ export default {
 		},
 	},
 	async created() {
-		this.imageshow = await fetch (`${process.env.APP_HOST}Files/${this.dataEditProduct.image}`)
+		this.imageshow = await fetch (`${process.env.MASKAWA_APP_HOST}Files/${this.dataEditProduct.image}`)
 		this.brands = await this.fetchBrands();
 		this.colors = await this.fetchColors();
 		console.log(this.dataEditProduct)
