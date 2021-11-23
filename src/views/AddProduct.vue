@@ -136,12 +136,12 @@ export default {
 	},
 	data() {
 		return {
-			brandlink: `${process.env.VUE_APP_MASKAWA_HOST}brand`,
+			brandlink: `${process.env.VUE_APP_MASKAWA_HOST}/brand`,
 			brands: [],
-			colorlink: `${process.env.VUE_APP_MASKAWA_HOST}color`,
+			colorlink: `${process.env.VUE_APP_MASKAWA_HOST}/color`,
 			colors: [],
 
-			addProductWithImage: `${process.env.VUE_APP_MASKAWA_HOST}addProductWithImage`,
+			addProductWithImage: `${process.env.VUE_APP_MASKAWA_HOST}/addProductWithImage`,
 			status: 0,
 			showStatus: false,
 
@@ -181,10 +181,12 @@ export default {
 					brandid: this.brandid,
 					colorid: this.colorid
 				}
+				console.log(productData)
 				this.addProduct(productData);
 			}
 		},
 		async addProduct(product) {
+			console.log(product)
 			var fullPath = document.getElementById("image").value;
 			if (fullPath) {
 				var startIndex =
@@ -196,7 +198,7 @@ export default {
 					filename = filename.substring(1);
 				}
 			}
-			console.log(product)
+			console.log(JSON.stringify(product))
 			console.log("Success first step")
 
 			let formData = new FormData();
@@ -212,9 +214,11 @@ export default {
 			if (res.ok) {
 				this.status = 1
 				this.showStatus = true
+			} else {
+				this.status = 0
+				this.showStatus = true
 			}
-
-			this.$router.push("/managesys");
+			setTimeout( () => this.$router.push("/managesys"), 2000);
 		},
 		async fetchBrands() {
 			const res = await fetch(this.brandlink);

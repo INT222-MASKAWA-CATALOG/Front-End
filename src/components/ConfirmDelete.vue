@@ -55,6 +55,9 @@ export default {
 			if (res.ok) {
 				this.status = 1
 				this.showStatus = true
+			} else {
+				this.status = 0
+				this.showStatus = true
 			}
 			setTimeout( () => location.reload(), 2000);
 		},
