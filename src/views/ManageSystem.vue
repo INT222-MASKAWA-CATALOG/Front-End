@@ -132,7 +132,7 @@ export default {
 		toggleOnlineshop: '',
 
 		/* Member */
-		memberlink: `${process.env.VUE_APP_MASKAWA_HOST}/member`,
+		memberlink: `${process.env.VUE_APP_MASKAWA_HOST}/brand`,
 		members: [],
 		/* Member */
 

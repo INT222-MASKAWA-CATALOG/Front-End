@@ -149,6 +149,7 @@ export default {
 			imageshow: '',
 			brandid: this.dataEditProduct.brandid,
 			colorid: this.dataEditProduct.colorid,
+			
 			invalidProductname: false,
 			invalidSaledate: false,
 			invalidDescription: false,

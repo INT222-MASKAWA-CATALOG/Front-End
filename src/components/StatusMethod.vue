@@ -1,5 +1,5 @@
 <template>
-	<div class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+	<div class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex shadow-xl">
 		<div class="relative">
 			<!--content-->
 			<div class="rounded-3xl bg-white outline-none focus:outline-none w-80 h-60">

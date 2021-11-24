@@ -174,12 +174,12 @@ export default {
 
 			if (checkForm) {
 				let productData = {
-					productname: this.productname,
-					saledate: this.saledate,
-					description: this.description,
-					image: this.image.name,
-					brandid: this.brandid,
-					colorid: this.colorid
+					Productname: this.productname,
+					Saledate: this.saledate,
+					Description: this.description,
+					Image: this.image.name,
+					Brandid: this.brandid,
+					Colorid: this.colorid
 				}
 				console.log(productData)
 				this.addProduct(productData);
