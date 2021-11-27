@@ -1,9 +1,13 @@
 <template>
 	<div class="navbar">
 		<div class="bg-grayon select-none text-right py-0.5 pr-8">
-			<button class="" v-on:click="toggleModalLogin()">Login</button>
-			<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-			<button class="" v-on:click="toggleModalRegister()">Register</button>
+			<div v-if="this.statusLogin">{{ this.getUserFromLogin }}</div>
+			<div v-else class="">
+				<button class="" v-on:click="toggleModalLogin()">Login</button>
+				<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+				<button class="" v-on:click="toggleModalRegister()">Register</button>
+			</div>
+			
 		</div>
 
 		<!-- flex style -->
@@ -23,13 +27,6 @@
 		<div class="grid grid-cols-3 shadow-md">
 			<div class="mr-auto justify-center"><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16"></router-link></div>
 			<div class="self-center text-xl select-none justify-center text-center">{{ head }}</div>
-			<!-- <div class="self-center flex pr-7 ml-auto justify-center">
-				<div class="border bg-gray-200 rounded-full p-1 mx-1">
-					<i class="ri-search-line text-lg"></i>&nbsp;&nbsp;
-					<input type="text" placeholder="Search" class="bg-gray-200 focus:outline-none" />
-				</div>
-				<i class="ri-bookmark-3-fill text-3xl"></i>
-			</div> -->
 		</div>
 	</div>
 	<!-- End Navigation Bar -->
@@ -51,13 +48,13 @@
 					<div class="py-6 px-16">
 						<div class="username flex flex-col">
 							<label for="username" class="text-gray-400 font-light text-left">Username</label>
-							<input type="text" id="username" v-model="username" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
-							<p v-if="this.invalidUsername" class="text-red-600 text-sm text-left font-extralight">Please Enter Username !!</p>
+							<input type="text" id="username" v-model="usernameLogin" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+							<p v-if="this.invalidUsernameLogin" class="text-red-600 text-sm text-left font-extralight">Please Enter Username !!</p>
 						</div>
 						<div class="password flex flex-col">
 							<label for="password" class="text-gray-400 font-light text-left">Password</label>
-							<input type="password" id="password" v-model="password" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
-							<p v-if="this.invalidPassword" class="text-red-600 text-sm text-left font-extralight">Please Enter Password !!</p>
+							<input type="password" id="password" v-model="passwordLogin" placeholder="" class="border-2 border-gray-300 rounded-md focus:outline-none py-1 px-2" />
+							<p v-if="this.invalidPasswordLogin" class="text-red-600 text-sm text-left font-extralight">Please Enter Password !!</p>
 						</div>
 					</div>
 				<!--footer-->
@@ -155,6 +152,18 @@ export default {
 	},
 	data() {
 		return {
+			/* Login Zone */
+			usernameLogin: "",
+			passwordLogin: "",
+			invalidUsernameLogin: false,
+			invalidPasswordLogin: false,
+			login: `${process.env.VUE_APP_MASKAWA_HOST}/login`,
+			getuser: `${process.env.VUE_APP_MASKAWA_HOST}/me`,
+			statusLogin: false,
+			getUserFromLogin: "",
+			/* Login Zone */
+
+			/* Register Zone */
 			username: "",
 			password: "",
 			email: "",
@@ -165,9 +174,11 @@ export default {
 			invalidEmail: false,
 			invalidPhone: false,
 			invalidGender: false,
+			/* Register Zone */
 
 			showModalLogin: false,
-			showModalRegister: false
+			showModalRegister: false,
+			
 		}
 	},
 	methods: {
@@ -177,12 +188,27 @@ export default {
 			this.showModalLogin = !this.showModalLogin;
 		},
 		async checkLogin () {
-			this.invalidUsername = this.username === "" ? true : false ;
-			this.invalidPassword = this.password === "" ? true : false ;
+			this.invalidUsernameLogin = this.usernameLogin === "" ? true : false ;
+			this.invalidPasswordLogin = this.passwordLogin === "" ? true : false ;
 		},
 		async submitLogin () {
-			this.checkLogin();
-			alert(this.username + this.password)
+			if (this.checkLogin()){
+				let loginData = {
+						username: this.usernameLogin,
+						password: this.passwordLogin
+					}
+				console.log(this.usernameLogin + this.passwordLogin)
+				const res = await fetch(this.login,{
+					method: "POST",
+					headers: {
+						"Content-type": "application/json",
+					},
+					body: JSON.stringify(loginData)
+				})
+				const tk = await res.json()
+				localStorage.setItem('token',"Bearer " + tk.token)
+				location.reload()
+			}
 		},
 		/* Login Zone */
 
@@ -213,6 +239,29 @@ export default {
 		},
 		/* Colab Zone */
 
+		/* ====================================================== */
+
+		async getUserFromToken() {
+
+			let token = localStorage.getItem('token')
+			console.log(token)
+			const res = await fetch(this.getuser,{
+				method: "GET",
+				headers: {
+						"Authorization": token,
+					},
+			})
+			if (res.ok) {
+				this.statusLogin = true
+				const user = await res.json()
+				const username = await user.username
+				this.getUserFromLogin = username
+			}
+		}
+
+	},
+	async created() {
+		this.getUserFromToken();
 	}
 };
 </script>

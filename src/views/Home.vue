@@ -49,7 +49,7 @@
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
 		<div v-for="p in filterShow()" :key="p.productid" v-on:click="toggleProductModal(p.productid)" class="bg-yellowPastel shadow-lg rounded-lg relative">
 		<img :src="`${hosts}/Files/${p.image}`" class="my-auto mx-auto object-cover w-full h-72" />
-		<i class="ri-bookmark-line absolute top-2 right-2 text-3xl z-50" />
+		<i class="ri-bookmark-line absolute top-2 right-2 text-3xl z-30" />
 		<div class="flex justify-between">
 			<span class="text-xl mx-1">{{ p.productname }}</span>
 		</div>
