@@ -31,6 +31,11 @@ const routes = [
 		path: '/managesys',
 		name: 'ManageSystem',
 		component: () => import(/* webpackChunkName: "managesystem" */ '../views/ManageSystem.vue')
+	},
+	{
+		path: '/profile',
+		name: 'Profile',
+		component: () => import(/* webpackChunkName: "managesystem" */ '../views/Profile.vue')
 	}
 ]
 

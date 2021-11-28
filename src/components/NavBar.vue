@@ -1,12 +1,41 @@
 <template>
 	<div class="navbar">
 		<div class="bg-grayon select-none text-right py-0.5 pr-8">
-			<div v-if="this.statusLogin">{{ this.getUserFromLogin }}</div>
+
+			<!-- Show User -->
+			<div v-if="this.statusLogin" class="">
+				<div class="w-full">
+					<div class="inline-flex align-middle">
+						<div class="font-semibold rounded outline-none focus:outline-none text-black" @click="toggleDropdown()" ref="btnDropdownRef">
+							Hi <span class="uppercase">{{ this.getUsernameFromLogin }}</span>
+						</div>
+						<div v-bind:class="{'hidden': !dropdownPopoverShow, 'block': dropdownPopoverShow}" class="text-base z-50 bg-white float-left py-2 list-none text-left rounded shadow-lg mt-1" style="min-width:12rem" ref="popoverDropdownRef">
+							<div class="py-2 px-4 font-semibold block w-full whitespace-nowrap text-black">
+								ACCOUNT
+							</div>
+							<div class="h-0 my-2 border border-solid border-t-0 border-blueGray-800 opacity-25"></div>
+							<a href="/profile" class="py-2 px-4 font-normal block w-full whitespace-nowrap">
+								Profile
+							</a>
+							<router-link to="#pablo" class="py-2 px-4 font-normal block w-full whitespace-nowrap">
+								Manage System | Bookmark
+							</router-link>
+							<button class="py-2 px-4 font-normal block w-full whitespace-nowrap text-left" @click="logout()">
+								Log out
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Show User -->
+			
+			<!-- Show Login | Register -->
 			<div v-else class="">
 				<button class="" v-on:click="toggleModalLogin()">Login</button>
 				<span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
 				<button class="" v-on:click="toggleModalRegister()">Register</button>
 			</div>
+			<!-- Show Login | Register -->
 			
 		</div>
 
@@ -112,10 +141,10 @@
 						<div class="gender flex flex-col">
 							<label for="gender" class="text-gray-400 font-light text-left">Gender</label>
 							<div class="radio-toolbar grid grid-cols-2 gap-2 my-2">
-									<input type="radio" id="radioMen" value="men" v-model="gender" class="opacity-0 fixed w-0">
+									<input type="radio" id="radioMen" value="MEN" v-model="gender" class="opacity-0 fixed w-0">
 									<label for="radioMen" class="radioGender inline-block bg-gray-100 px-2 py-1 border-2 border-gray-300 rounded-md select-none text-center">MEN</label>
 
-									<input type="radio" id="radioWomen" value="women" v-model="gender" class="opacity-0 fixed w-0">
+									<input type="radio" id="radioWomen" value="WOMEN" v-model="gender" class="opacity-0 fixed w-0">
 									<label for="radioWomen" class="radioGender inline-block bg-gray-100 px-2 py-1 border-2 border-gray-300 rounded-md select-none text-center">WOMEN</label>
 							</div>
 							<p v-if="this.invalidGender" class="text-red-600 text-sm text-left font-extralight">Please Select Gender !!</p>
@@ -138,11 +167,18 @@
 	<div v-if="showModalRegister" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
 	<!-- End Register Modal -->
 
+	<status-method v-if="this.showStatus" :status="status" />
+
 </template>
 
 <script>
+
+import { createPopper } from "@popperjs/core";
+import StatusMethod from "./StatusMethod.vue"
+
 export default {
 	components: {
+		StatusMethod
 		},
 	props: {
 		head: {
@@ -150,8 +186,15 @@ export default {
 			require: true,
 		},
 	},
+	emits: [
+	],
+	name: "dropdown",
 	data() {
 		return {
+			dropdownPopoverShow: false,
+			status: 0,
+			showStatus: false,
+
 			/* Login Zone */
 			usernameLogin: "",
 			passwordLogin: "",
@@ -161,6 +204,7 @@ export default {
 			getuser: `${process.env.VUE_APP_MASKAWA_HOST}/me`,
 			statusLogin: false,
 			getUserFromLogin: "",
+			getUsernameFromLogin: "",
 			/* Login Zone */
 
 			/* Register Zone */
@@ -174,6 +218,7 @@ export default {
 			invalidEmail: false,
 			invalidPhone: false,
 			invalidGender: false,
+			register: `${process.env.VUE_APP_MASKAWA_HOST}/register`,
 			/* Register Zone */
 
 			showModalLogin: false,
@@ -226,7 +271,30 @@ export default {
 			this.invalidGender = this.gender === "" ? true : false ;
 		},
 		async submitRegister () {
-			this.checkRegister();
+			if(this.checkRegister()) {
+
+				let formData = new FormData();
+				formData.append("username",this.username)
+				formData.append("password",this.password)
+				formData.append("email",this.email)
+				formData.append("phone",this.phone)
+				formData.append("gender",this.gender)
+				console.log(formData)
+
+				const res = await fetch(this.register,{
+					method: "POST",
+					body: formData
+				})
+
+				if (res.ok) {
+					this.status = 1
+					this.showStatus = true
+				} else {
+					this.status = 0
+					this.showStatus = true
+				}
+				setTimeout( () => location.reload(), 1000);
+			}
 		},
 		/* Register Zone */
 
@@ -241,8 +309,7 @@ export default {
 
 		/* ====================================================== */
 
-		async getUserFromToken() {
-
+		getUserFromToken: async function() {
 			let token = localStorage.getItem('token')
 			console.log(token)
 			const res = await fetch(this.getuser,{
@@ -254,14 +321,34 @@ export default {
 			if (res.ok) {
 				this.statusLogin = true
 				const user = await res.json()
+				this.getUserFromLogin = user
 				const username = await user.username
-				this.getUserFromLogin = username
+				this.getUsernameFromLogin = username
 			}
-		}
+		},
+
+		toggleDropdown: function(){
+			if(this.dropdownPopoverShow){
+				this.dropdownPopoverShow = false;
+			} else {
+				this.dropdownPopoverShow = true;
+				createPopper(this.$refs.btnDropdownRef, this.$refs.popoverDropdownRef, {
+					placement: "bottom-start"
+				});
+			}
+		},
+
+		logout: async function() {
+			localStorage.removeItem("token");
+			setTimeout( () => this.$router.push("/home"),400 );
+			setTimeout( () => location.reload(), 500 );
+		},
 
 	},
 	async created() {
-		this.getUserFromToken();
+		if(localStorage.getItem("token") != null) {
+			this.getUserFromToken();
+		}
 	}
 };
 </script>
