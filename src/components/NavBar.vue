@@ -7,7 +7,7 @@
 				<div class="w-full">
 					<div class="inline-flex align-middle">
 						<div class="font-semibold rounded outline-none focus:outline-none text-black" @click="toggleDropdown()" ref="btnDropdownRef">
-							Hi <span class="uppercase">{{ this.getUsernameFromLogin }}</span>
+							Hi <span class="uppercase">{{ this.getUsernameFromLogin }}</span><!-- <i class="ri-account-circle-fill align-baseline text-xl" /> -->
 						</div>
 						<div v-bind:class="{'hidden': !dropdownPopoverShow, 'block': dropdownPopoverShow}" class="text-base z-50 bg-white float-left py-2 list-none text-left rounded shadow-lg mt-1" style="min-width:12rem" ref="popoverDropdownRef">
 							<div class="py-2 px-4 font-semibold block w-full whitespace-nowrap text-black">
@@ -17,9 +17,12 @@
 							<a href="/profile" class="py-2 px-4 font-normal block w-full whitespace-nowrap">
 								Profile
 							</a>
-							<router-link to="#pablo" class="py-2 px-4 font-normal block w-full whitespace-nowrap">
-								Manage System | Bookmark
-							</router-link>
+							<a v-if="this.getUserFromLogin.roleid == 2" href="/managesys" class="py-2 px-4 font-normal block w-full whitespace-nowrap">
+								Manage System
+							</a>
+							<a v-if="this.getUserFromLogin.roleid == 1" href="/record" class="py-2 px-4 font-normal block w-full whitespace-nowrap">
+								Bookmark
+							</a>
 							<button class="py-2 px-4 font-normal block w-full whitespace-nowrap text-left" @click="logout()">
 								Log out
 							</button>
@@ -194,6 +197,7 @@ export default {
 			dropdownPopoverShow: false,
 			status: 0,
 			showStatus: false,
+			roleStatus: "",
 
 			/* Login Zone */
 			usernameLogin: "",
