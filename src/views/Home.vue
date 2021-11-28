@@ -111,24 +111,48 @@ export default {
 
 		/* ==================== Get All Data Zone ==================== */
 		async fetchBrand() {
-			const res = await fetch(this.brandlink);
+			let token = localStorage.getItem('token')
+			const res = await fetch(this.brandlink,{
+				method: "GET",
+				headers: {
+						"Authorization": token,
+					},
+			});
 			const data = await res.json();
 			return data;
 		},
 		async fetchColor() {
-			const res = await fetch(this.colorlink);
+			let token = localStorage.getItem('token')
+			const res = await fetch(this.colorlink,{
+				method: "GET",
+				headers: {
+						"Authorization": token,
+					},
+			});
 			const data = await res.json();
 			return data;
 		},
 		async fetchProduct() {
-			const res = await fetch(this.productlink);
+			let token = localStorage.getItem('token')
+			const res = await fetch(this.productlink,{
+				method: "GET",
+				headers: {
+						"Authorization": token,
+					},
+			});
 			const data = await res.json();
 			return data;
 		},
 		/* ==================== Get All Data Zone ==================== */
 
 		async fetchEachProduct() {
-			const res = await fetch(`${this.productlink}/${this.toggleId}`);
+			let token = localStorage.getItem('token')
+			const res = await fetch(`${this.productlink}/${this.toggleId}`,{
+				method: "GET",
+				headers: {
+						"Authorization": token,
+					},
+			});
 			const data = await res.json();
 			return data;
 		},
