@@ -51,7 +51,8 @@ export default {
 			this.$emit('cancel')
 		},
 		async confirm() {
-			const res = await fetch(`${this.datalink}/${this.path}`,{method: "DELETE"})
+			let token = localStorage.getItem('token')
+			const res = await fetch(`${this.datalink}/${this.path}`,{method: "DELETE",headers: {"Authorization": token}})
 			if (res.ok) {
 				this.status = 1
 				this.showStatus = true

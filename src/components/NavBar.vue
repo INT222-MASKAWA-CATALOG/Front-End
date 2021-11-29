@@ -344,8 +344,8 @@ export default {
 
 		logout: async function() {
 			localStorage.removeItem("token");
-			setTimeout( () => this.$router.push("/home"),300 );
-			setTimeout( () => location.reload(), 500 );
+			setTimeout( () => location.reload(), 300 );
+			setTimeout( () => this.$router.push("/home"),500 );
 		},
 
 	},

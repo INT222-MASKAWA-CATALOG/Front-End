@@ -27,7 +27,7 @@
 							<!-- Online Shop -->
 							<div v-for="s in e.onlineshop" :key="s.onlineid" class="flex items-center gap-4">
 								<div class="max-w-xss border my-1 w-28">
-									<img :src="`${hosts}/Files/${s.logo}`" class="h-7 mx-auto"/>
+									<img :src="`${hosts}/Files/${s.shop.logo}`" class="h-7 mx-auto"/>
 								</div>
 								<span class="text-lg">THB {{ s.price }}</span>
 								<div class="border border-black rounded px-2 py-1 shadow-md">
