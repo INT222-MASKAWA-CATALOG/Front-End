@@ -121,31 +121,36 @@
 			<!-- Right Side -->
 		</div>
 	</form>
+
+	<status-method v-if="this.showStatus" :status="status" />
 </template>
 
 <script>
 import NavBar from "../components/NavBar.vue";
+import StatusMethod from "../components/StatusMethod.vue";
 
 export default {
 	components: {
 		NavBar,
+		StatusMethod
 	},
 	props: [
 		"dataEditProduct"
 	],
 	data() {
 		return {
+			host: process.env.VUE_APP_MASKAWA_HOST,
 			brandlink: `${process.env.VUE_APP_MASKAWA_HOST}/brand`,
 			brands: [],
 			colorlink: `${process.env.VUE_APP_MASKAWA_HOST}/color`,
 			colors: [],
 			addProductDataLink: `${process.env.VUE_APP_MASKAWA_HOST}/addProduct`,
-			uploadImageLink: `${process.env.VUE_APP_MASKAWA_HOST}/uploadImage`,
+			updateProductWithImage: `${process.env.VUE_APP_MASKAWA_HOST}/updateProductWithImage`,
 
 			productname: this.dataEditProduct.productname,
 			saledate: this.dataEditProduct.saledate,
 			description: this.dataEditProduct.description,
-			image: null,
+			image: '',
 			imageshow: '',
 			brandid: this.dataEditProduct.brandid,
 			colorid: this.dataEditProduct.colorid,
@@ -159,13 +164,94 @@ export default {
 		};
 	},
 	methods: {
+		submitForm() {
+			this.invalidProductname = this.productname === "" ? true : false;
+			this.invalidSaledate = this.saledate === null ? true : false;
+			this.invalidDescription = this.description === "" ? true : false;
+			this.invalidImage = this.image === null ? true : false;
+			this.invalidBrandid = this.brandid === 0 ? true : false;
+			this.invalidColorid = this.colorid === 0 ? true : false;
+
+			let checkForm = (this.productname !== "" && this.saledate !== null && this.description !== "" && this.images !== null && this.brandid !== 0 && this.colorid !== 0)
+
+			if (checkForm) {
+				let productData = {
+					productname: this.productname,
+					saledate: this.saledate,
+					description: this.description,
+					image: this.image.name,
+					brandid: this.brandid,
+					colorid: this.colorid
+				}
+				console.log(productData)
+				this.editProduct(productData);
+			}
+		},
+		async editProduct(product) {
+			console.log(product)
+			var fullPath = document.getElementById("image").value;
+			if (fullPath) {
+				var startIndex =
+					fullPath.indexOf("\\") >= 0
+						? fullPath.lastIndexOf("\\")
+						: fullPath.lastIndexOf("/");
+				var filename = fullPath.substring(startIndex);
+				if (filename.indexOf("\\") === 0 || filename.indexOf("/") === 0) {
+					filename = filename.substring(1);
+				}
+			}
+			console.log(JSON.stringify(product))
+			console.log("Success first step")
+
+			let formData = new FormData();
+
+			formData.append("product",JSON.stringify(product))
+			formData.append("file", this.image, this.image.name);
+
+			console.log(this.dataEditProduct.productid)
+
+			let token = localStorage.getItem('token')
+			const res = await fetch(`${this.updateProductWithImage}/${this.dataEditProduct.productid}`,{
+				method: "PUT",
+				body: formData,
+				headers: {
+						"Authorization": token,
+					},
+			})
+			
+			if (res.ok) {
+				this.status = 1
+				this.showStatus = true
+				console.log("Success")
+			} else {
+				this.status = 0
+				this.showStatus = true
+				console.log("Failed")
+			}
+			setTimeout( () => this.$router.push("/managesys"), 1000);
+		},
+
 		async fetchBrands() {
-			const res = await fetch(this.brandlink);
+			let token = localStorage.getItem('token')
+			const res = await fetch(this.brandlink,{
+				method: "GET",
+				headers: {
+						"Authorization": token,
+						'Content-Type': 'application/json',
+					},
+			});
 			const data = await res.json();
 			return data;
 		},
 		async fetchColors() {
-			const res = await fetch(this.colorlink);
+			let token = localStorage.getItem('token')
+			const res = await fetch(this.colorlink,{
+				method: "GET",
+				headers: {
+						"Authorization": token,
+						'Content-Type': 'application/json',
+					},
+			});
 			const data = await res.json();
 			return data;
 		},
@@ -182,10 +268,15 @@ export default {
 		},
 	},
 	async created() {
-		this.imageshow = await fetch (`${process.env.VUE_APP_MASKAWA_HOST}/Files/${this.dataEditProduct.image}`)
+		this.imageshow = `${this.host}/Files/${this.dataEditProduct.image}`
+    const response = await fetch(this.imageshow);
+		const blob = await response.blob()
+		this.image = new File([blob], this.dataEditProduct.image, {type: blob.type})
 		this.brands = await this.fetchBrands();
 		this.colors = await this.fetchColors();
 		console.log(this.dataEditProduct)
+		console.log(this.imageshow)
+		console.log(this.image)
 	},
 };
 </script>

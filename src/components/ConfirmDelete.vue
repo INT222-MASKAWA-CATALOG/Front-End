@@ -60,7 +60,7 @@ export default {
 				this.status = 0
 				this.showStatus = true
 			}
-			setTimeout( () => location.reload(), 2000);
+			setTimeout( () => location.reload(), 500);
 		},
 	},
 	async created() {
