@@ -25,16 +25,18 @@
 		<div :class="{'hidden': openTab !== 1, 'block': openTab === 1}"  class="text-lg">
 			<div class="grid grid-cols-12">
 				<div class="col-span-3 select-none text-gray-400 mb-4">User Name</div>
-				<div class="col-span-5 select-none text-gray-400 mb-4">Email</div>
-				<div class="col-span-3 select-none text-gray-400 mb-4">Role</div>
+				<div class="col-span-4 select-none text-gray-400 mb-4">Email</div>
+				<div class="col-span-2 select-none text-gray-400 mb-4">Role</div>
 			</div>
 			<div v-for="u in users" :key="u.userid" class="bg-white shadow-sm my-0.5 py-1 grid grid-cols-12">
 				<div class="col-span-3 ml-4">{{ u.username }}</div>
-				<div class="col-span-5">{{ u.email }}</div>
-				<div class="col-span-3">{{ u.role.name}}</div>
-				<div class="flex select-none justify-end mr-4">
-					<!-- <div class="ri-pencil-fill mr-4 hover:text-green-500" /> -->
-					<div class="ri-delete-bin-fill hover:text-red-500" @click="deleteMember(u)" />
+				<div class="col-span-4">{{ u.email }}</div>
+				<div class="col-span-2">{{ u.role.name}}</div>
+				<div class="col-span-3 flex select-none justify-end mr-4">
+					<button @click="switchRole(u)" class="py-0.5 my-auto text-xs bg-yellowPastel px-1 rounded-lg border-2 border-black hover:bg-yellow-200">
+						Switch Role
+					</button>
+					<div class="ri-delete-bin-fill hover:text-red-500 ml-3" @click="deleteUser(u)" />
 				</div>
 			</div>
 		</div>
@@ -212,10 +214,13 @@ export default {
 			showStatus: false,
 
 			token: localStorage.getItem('token'),
+			getuser: `${process.env.VUE_APP_MASKAWA_HOST}/me`,
+			me: '',
 
 			/* User */
 			userlink: `${process.env.VUE_APP_MASKAWA_HOST}/user`,
 			users: [],
+			updateRole: `${process.env.VUE_APP_MASKAWA_HOST}/updateRole`,
 			/* User */
 
 			/* Brand */
@@ -258,6 +263,35 @@ export default {
 		toggleTabs(tabNumber) {
 			// console.log(tabNumber)
 			this.openTab = tabNumber
+		},
+
+		async switchRole(user) {
+			var setRole = 0;
+			if (user.role.roleid == 1) {
+				setRole = 2
+			} else {
+				setRole = 1
+			}
+
+			let formData = new FormData()
+			formData.append('userid',user.userid);
+			formData.append('roleid',setRole);
+
+			const res = await fetch(this.updateRole,{
+				method: "PUT",
+				body: formData,
+				headers: {
+						"Authorization": this.token,
+					},
+			})
+			if (res.ok) {
+				this.status = 1
+				this.showStatus = true
+			} else {
+				this.status = 0
+				this.showStatus = true
+			}
+			setTimeout( () => location.reload(), 500);
 		},
 
 		/* ==================== Add Data Zone ==================== */
@@ -430,6 +464,16 @@ export default {
 		this.colors = await this.fetchColor();
 		this.products = await this.fetchProduct();
 		this.users = await this.fetchUser();
+		const res = await fetch(this.getuser,{
+				method: "GET",
+				headers: {
+						"Authorization": this.token,
+					},
+			})
+			if (res.ok) {
+				const user = await res.json()
+				this.me = user
+			}
 	}
 };
 

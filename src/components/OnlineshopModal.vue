@@ -148,7 +148,13 @@ export default {
 		},
 
 		async fetchShop() {
-			const res = await fetch(this.shopLink);
+			let token = localStorage.getItem('token')
+			const res = await fetch(this.shopLink,{
+					method: "GET",
+					headers: {
+						"Authorization": token,
+					},
+				});
 			const data = await res.json();
 			return data;
 		},
