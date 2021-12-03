@@ -234,7 +234,9 @@ export default {
 
 	},
 	async created() {
-		this.getUserFromToken();
+		if(localStorage.getItem("token") != null) {
+			this.getUserFromToken();
+		}
 		this.brands = await this.fetchBrand();
 		this.colors = await this.fetchColor();
 		this.products = await this.fetchProduct();

@@ -81,7 +81,7 @@ export default {
       this.invalidGender = this.gender !== "" ? true : false;
 
       if(this.invalidEmail && this.invalidPhone && this.invalidGender) {
-        console.log(this.email + this.phone + this.gender)
+        // console.log(this.email + this.phone + this.gender)
         let update = {
           userid: this.userProfile.userid,
           email: this.email,
@@ -122,7 +122,7 @@ export default {
       }
     },
     async editProfile(oldProfile) {
-      console.log(oldProfile)
+      // console.log(oldProfile)
       this.isEditNow = true
       this.email = oldProfile.email
       this.phone = oldProfile.phone

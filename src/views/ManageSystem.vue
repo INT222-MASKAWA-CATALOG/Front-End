@@ -304,7 +304,7 @@ export default {
 					brandname: this.brandname,
 					brandlink: this.blink
 				}
-				console.log(brandData)
+				// console.log(brandData)
 				let brandJson = JSON.stringify(brandData)
 				const res = await fetch(this.addbrand,{
 					method: "POST",
@@ -328,14 +328,14 @@ export default {
 			this.invalidColorname = this.colorname !== '' ? true : false;
 			this.invalidHexcode = this.hexcode !== '' ? true : false;
 
-			console.log(this.colorname + this.hexcode.toUpperCase())
+			// console.log(this.colorname + this.hexcode.toUpperCase())
 
 			if(this.invalidColorname && this.invalidHexcode) {
 				let colorData = {
 					colorname: this.colorname,
-					hexcode: this.hexcode
+					hexcode: this.hexcode.toUpperCase()
 				}
-				console.log(colorData)
+				// console.log(colorData)
 				let colorJson = JSON.stringify(colorData)
 				const res = await fetch(this.addcolor,{
 					method: "POST",
@@ -406,32 +406,32 @@ export default {
 
 		/* ==================== Update Data Zone ==================== */
 		async editProduct(p) {
-			console.log(p)
+			// console.log(p)
 			this.$emit('edit-product',p)
 		},
 		/* ==================== Update Data Zone ==================== */
 
 		/* ==================== Delete Zone ==================== */
 		async deleteUser(u) {
-			console.log(u)
+			// console.log(u)
 			this.datalink = this.userlink
 			this.path = u.userid
 			this.showConfirm = !this.showConfirm
 		},
 		async deleteBrand(b) {
-			console.log(b)
+			// console.log(b)
 			this.datalink = this.brandlink
 			this.path = b.brandid
 			this.showConfirm = !this.showConfirm
 		},
 		async deleteColor(c) {
-			console.log(c)
+			// console.log(c)
 			this.datalink = this.colorlink
 			this.path = c.colorid
 			this.showConfirm = !this.showConfirm
 		},
 		async deleteProduct(p) {
-			console.log(p)
+			// console.log(p)
 			this.datalink = this.productlink
 			this.path = p.productid
 			this.showConfirm = !this.showConfirm

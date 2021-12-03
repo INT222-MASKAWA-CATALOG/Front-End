@@ -115,7 +115,7 @@ export default {
 		async addOnlineShop(data) {
 			let token = localStorage.getItem('token')
 				let dataJson = JSON.stringify(data)
-				console.log(dataJson)
+				// console.log(dataJson)
 				const res = await fetch(this.addOnlineLink,{
 					method: "POST",
 					body: dataJson,
@@ -135,7 +135,7 @@ export default {
 		},
 
 		async deleteOnline(o) {
-			console.log(o)
+			// console.log(o)
 			this.datalink = this.onlinelink
 			this.path = o.onlineid
 			this.showConfirm = true

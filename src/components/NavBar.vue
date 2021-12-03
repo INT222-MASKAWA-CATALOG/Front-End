@@ -246,7 +246,7 @@ export default {
 						username: this.usernameLogin,
 						password: this.passwordLogin
 					}
-				console.log(this.usernameLogin + this.passwordLogin)
+				// console.log(this.usernameLogin + this.passwordLogin)
 				const res = await fetch(this.login,{
 					method: "POST",
 					headers: {

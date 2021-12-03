@@ -183,12 +183,12 @@ export default {
 					brandid: this.brandid,
 					colorid: this.colorid
 				}
-				console.log(productData)
+				// console.log(productData)
 				this.editProduct(productData);
 			}
 		},
 		async editProduct(product) {
-			console.log(product)
+			// console.log(product)
 			var fullPath = document.getElementById("image").value;
 			if (fullPath) {
 				var startIndex =
@@ -200,15 +200,15 @@ export default {
 					filename = filename.substring(1);
 				}
 			}
-			console.log(JSON.stringify(product))
-			console.log("Success first step")
+			// console.log(JSON.stringify(product))
+			// console.log("Success first step")
 
 			let formData = new FormData();
 
 			formData.append("product",JSON.stringify(product))
 			formData.append("file", this.image, this.image.name);
 
-			console.log(this.dataEditProduct.productid)
+			// console.log(this.dataEditProduct.productid)
 
 			let token = localStorage.getItem('token')
 			const res = await fetch(`${this.updateProductWithImage}/${this.dataEditProduct.productid}`,{
@@ -222,11 +222,11 @@ export default {
 			if (res.ok) {
 				this.status = 1
 				this.showStatus = true
-				console.log("Success")
+				// console.log("Success")
 			} else {
 				this.status = 0
 				this.showStatus = true
-				console.log("Failed")
+				// console.log("Failed")
 			}
 			setTimeout( () => this.$router.push("/managesys"), 1000);
 		},
@@ -263,8 +263,8 @@ export default {
 				this.imageshow = e.target.result;
 			};
 			reader.readAsDataURL(this.imageshow);
-			console.log(this.image);
-			console.log(this.image.name);
+			// console.log(this.image);
+			// console.log(this.image.name);
 		},
 	},
 	async created() {
@@ -274,9 +274,9 @@ export default {
 		this.image = new File([blob], this.dataEditProduct.image, {type: blob.type})
 		this.brands = await this.fetchBrands();
 		this.colors = await this.fetchColors();
-		console.log(this.dataEditProduct)
-		console.log(this.imageshow)
-		console.log(this.image)
+		// console.log(this.dataEditProduct)
+		// console.log(this.imageshow)
+		// console.log(this.image)
 	},
 };
 </script>

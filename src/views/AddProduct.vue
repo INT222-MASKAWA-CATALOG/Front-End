@@ -174,12 +174,12 @@ export default {
 					brandid: this.brandid,
 					colorid: this.colorid
 				}
-				console.log(productData)
+				// console.log(productData)
 				this.addProduct(productData);
 			}
 		},
 		async addProduct(product) {
-			console.log(product)
+			// console.log(product)
 			var fullPath = document.getElementById("image").value;
 			if (fullPath) {
 				var startIndex =
@@ -191,8 +191,8 @@ export default {
 					filename = filename.substring(1);
 				}
 			}
-			console.log(JSON.stringify(product))
-			console.log("Success first step")
+			// console.log(JSON.stringify(product))
+			// console.log("Success first step")
 
 			let formData = new FormData();
 
