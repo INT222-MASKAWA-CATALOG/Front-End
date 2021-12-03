@@ -458,8 +458,16 @@ export default {
 			this.toggleId = id;
 			this.toggleOnlineshop = onlineshop;
 		},
+
+		async checkRoleAuthen() {
+			if (localStorage.getItem("token") == null || this.me.role.roleid != 2) {
+				alert("หยุดเดี๋ยวนี้เลยนะ เจ้าจอมจุ้นจ้าน")
+				this.$router.push("/home")
+			}
+		}
 	},
 	async created() {
+		this.checkRoleAuthen();
 		this.brands = await this.fetchBrand();
 		this.colors = await this.fetchColor();
 		this.products = await this.fetchProduct();

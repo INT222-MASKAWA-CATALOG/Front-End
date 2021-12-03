@@ -99,8 +99,15 @@ export default {
         }
 				setTimeout( () => location.reload(), 500);
 		},
+    checkRoleAuthen: async function () {
+			if (localStorage.getItem("token") == null || this.me.role.roleid != 1) {
+				alert("หยุดเดี๋ยวนี้เลยนะ เจ้าจอมจุ้นจ้าน")
+				this.$router.push("/home")
+			}
+		}
   },
   async created() {
+    this.checkRoleAuthen();
     this.getUserFromToken();
   },
 };
