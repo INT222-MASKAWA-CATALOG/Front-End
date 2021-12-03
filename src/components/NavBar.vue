@@ -59,6 +59,7 @@
 		<div class="grid grid-cols-3 shadow-md">
 			<div class="mr-auto justify-center"><router-link to="/home"><img src="../assets/maskawa_logo.png" class="h-16"></router-link></div>
 			<div class="self-center text-xl select-none justify-center text-center">{{ head }}</div>
+			<div class="self-center text-right mr-4"><router-link to="/team"><div class="ri-team-line text-2xl " /></router-link></div>
 		</div>
 	</div>
 	<!-- End Navigation Bar -->
