@@ -49,8 +49,8 @@
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
 		<div v-for="p in filterShow()" :key="p.productid" class="bg-yellowPastel shadow-lg rounded-lg relative">
 			<img :src="`${hosts}/Files/${p.image}`" v-on:click="toggleProductModal(p.productid)" class="my-auto mx-auto object-cover w-full h-72" />
-			<div v-if="this.userProfile">
-				<button v-if="p.bookmark" class="ri-bookmark-fill absolute top-2 right-2 text-3xl z-40" @click="delRecord(this.userProfile.userid,p.productid)" />
+			<div v-if="this.userProfile.role.name == 'ROLE_USER'">
+				<button v-if="p.bookmark" class="ri-bookmark-fill absolute top-2 right-2 text-3xl z-40 text-yellow-400" @click="delRecord(this.userProfile,p.productid)" />
 				<button v-else class="ri-bookmark-line absolute top-2 right-2 text-3xl z-40" @click="addRecord(this.userProfile.userid,p.productid)" />
 			</div>
 			<div class="flex justify-between" v-on:click="toggleProductModal(p.productid)">
@@ -237,6 +237,35 @@ export default {
         }
 				setTimeout( () => location.reload(), 500);
 		},
+
+		async delRecord(user,pid) {
+
+			let record = user.record
+			let rid = 0
+
+			for (let i = 0; i < record.length; i++) {
+				// console.log(record[i].productid)
+				if(record[i].productid == pid) {
+					rid = record[i].recordid
+				}
+			}
+			const res = await fetch(`${process.env.VUE_APP_MASKAWA_HOST}/deleteRecord/${rid}`,{
+        method: "DELETE",
+        headers: {
+          "Authorization": this.token,
+          },
+        })
+
+        if (res.ok) {
+          this.status = 1
+          this.showStatus = true
+        } else {
+          this.status = 0
+          this.showStatus = true
+        }
+				setTimeout( () => location.reload(), 500);
+		},
+		
 		async checkBookmark() {
 			// console.log(this.userProfile)
 			// let array = []
@@ -258,8 +287,9 @@ export default {
 	async created() {
 		if(localStorage.getItem("token") != null) {
 			this.getUserFromToken();
+			setTimeout(() => this.checkBookmark(),500)
 		}
-		setTimeout(() => this.checkBookmark(),500)
+		
 		this.brands = await this.fetchBrand();
 		this.colors = await this.fetchColor();
 		this.products = await this.fetchProduct();
