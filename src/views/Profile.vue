@@ -97,14 +97,16 @@ export default {
           "Content-type": "application/json",
           },
         })
+
         if (res.ok) {
-					this.status = 1
-					this.showStatus = true
-				} else {
-					this.status = 0
-					this.showStatus = true
-				}
-				setTimeout( () => location.reload(), 1000);
+          this.status = 1
+          this.showStatus = true
+        } else {
+          this.status = 0
+          this.showStatus = true
+        }
+
+        setTimeout( () => location.reload(), 500);
       }
     },
     getUserFromToken: async function () {
