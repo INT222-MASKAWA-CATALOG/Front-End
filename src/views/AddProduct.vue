@@ -163,13 +163,6 @@ export default {
 	},
 	methods: {
 		submitForm() {
-			this.invalidProductname = this.productname === "" ? true : false;
-			this.invalidSaledate = this.saledate === null ? true : false;
-			this.invalidDescription = this.description === "" ? true : false;
-			this.invalidImage = this.image === null ? true : false;
-			this.invalidBrandid = this.brandid === 0 ? true : false;
-			this.invalidColorid = this.colorid === 0 ? true : false;
-
 			let checkForm = (this.productname !== "" && this.saledate !== null && this.description !== "" && this.images !== null && this.brandid !== 0 && this.colorid !== 0)
 
 			if (checkForm) {

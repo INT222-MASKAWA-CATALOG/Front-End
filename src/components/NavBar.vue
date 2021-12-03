@@ -144,11 +144,11 @@
 						<div class="gender flex flex-col">
 							<label for="gender" class="text-gray-400 font-light text-left">Gender</label>
 							<div class="radio-toolbar grid grid-cols-2 gap-2 my-2">
-									<input type="radio" id="radioMen" value="MEN" v-model="gender" class="opacity-0 fixed w-0">
-									<label for="radioMen" class="radioGender inline-block bg-gray-100 px-2 py-1 border-2 border-gray-300 rounded-md select-none text-center">MEN</label>
+									<input type="radio" id="radioMen" value="MALE" v-model="gender" class="opacity-0 fixed w-0">
+									<label for="radioMen" class="radioGender inline-block bg-gray-100 px-2 py-1 border-2 border-gray-300 rounded-md select-none text-center">MALE</label>
 
-									<input type="radio" id="radioWomen" value="WOMEN" v-model="gender" class="opacity-0 fixed w-0">
-									<label for="radioWomen" class="radioGender inline-block bg-gray-100 px-2 py-1 border-2 border-gray-300 rounded-md select-none text-center">WOMEN</label>
+									<input type="radio" id="radioWomen" value="FEMALE" v-model="gender" class="opacity-0 fixed w-0">
+									<label for="radioWomen" class="radioGender inline-block bg-gray-100 px-2 py-1 border-2 border-gray-300 rounded-md select-none text-center">FEMALE</label>
 							</div>
 							<p v-if="this.invalidGender" class="text-red-600 text-sm text-left font-extralight">Please Select Gender !!</p>
 						</div>
@@ -315,7 +315,7 @@ export default {
 
 		getUserFromToken: async function() {
 			let token = localStorage.getItem('token')
-			console.log(token)
+			// console.log(token)
 			const res = await fetch(this.getuser,{
 				method: "GET",
 				headers: {

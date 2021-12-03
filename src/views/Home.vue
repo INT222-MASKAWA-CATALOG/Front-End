@@ -26,7 +26,7 @@
 				</option>
 			</select>
 		</div>
-		<div @click="clearFilterBrand()" class="ri-filter-off-line text-2xl my-auto ml-2"/>
+		<div @click="this.inputBrand = ''" class="ri-filter-off-line text-2xl my-auto ml-2"/>
 
 		<div id="colorFilter" class="ml-8">
 			<select name="color" v-model="inputColor" class="rounded-md focus:outline-none p-2 shadow-md w-32">
@@ -36,7 +36,7 @@
 				</option>
 			</select>
 		</div>
-		<div @click="clearFilterColor()" class="ri-filter-off-line text-2xl my-auto ml-2"/>
+		<div @click="this.inputColor = ''" class="ri-filter-off-line text-2xl my-auto ml-2"/>
 		
 		<div id="search" class="bg-gray-200 p-2 w-min ml-auto rounded-lg flex select-none">
 			<input type="text" v-model="inputName" placeholder="Search ..." class="bg-gray-200 focus:outline-none">
@@ -49,7 +49,7 @@
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
 		<div v-for="p in filterShow()" :key="p.productid" v-on:click="toggleProductModal(p.productid)" class="bg-yellowPastel shadow-lg rounded-lg relative">
 		<img :src="`${hosts}/Files/${p.image}`" class="my-auto mx-auto object-cover w-full h-72" />
-		<i class="ri-bookmark-line absolute top-2 right-2 text-3xl z-30" />
+		<button class="ri-bookmark-line absolute top-2 right-2 text-3xl z-30" @click="addRecord()"/>
 		<div class="flex justify-between">
 			<span class="text-xl mx-1">{{ p.productname }}</span>
 		</div>
@@ -78,7 +78,7 @@ export default {
 		NavBar,
 		ProductModal,
 	},
-	props: {},
+	props: [],
 	data() {
 		return {
 			hosts: process.env.VUE_APP_MASKAWA_HOST,
@@ -180,13 +180,12 @@ export default {
 		filterShow() {
 			return this.filterBySearch(this.filterByBrand(this.filterByColor(this.products)))
 		},
-		clearFilterBrand() {
-			this.inputBrand = ''
-		},
-		clearFilterColor() {
-			this.inputColor = ''
-		}
+
 		/* ==================== Filter Data Zone ==================== */
+
+		addRecord () {
+
+		}
 
 	},
 	async created() {
