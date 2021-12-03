@@ -47,13 +47,13 @@
 
 	<!-- Product -->
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
-		<div v-for="p in filterShow()" :key="p.productid" v-on:click="toggleProductModal(p.productid)" class="bg-yellowPastel shadow-lg rounded-lg relative">
-		<img :src="`${hosts}/Files/${p.image}`" class="my-auto mx-auto object-cover w-full h-72" />
-		<button class="ri-bookmark-line absolute top-2 right-2 text-3xl z-30" @click="addRecord()"/>
-		<div class="flex justify-between">
-			<span class="text-xl mx-1">{{ p.productname }}</span>
+		<div v-for="p in filterShow()" :key="p.productid" class="bg-yellowPastel shadow-lg rounded-lg relative">
+			<img :src="`${hosts}/Files/${p.image}`" v-on:click="toggleProductModal(p.productid)" class="my-auto mx-auto object-cover w-full h-72" />
+			<button v-if="this.userProfile" class="ri-bookmark-line absolute top-2 right-2 text-3xl z-40" @click="addRecord(this.userProfile.userid,p.productid)"/>
+			<div class="flex justify-between" v-on:click="toggleProductModal(p.productid)">
+				<span class="text-xl mx-1">{{ p.productname }}</span>
+			</div>
 		</div>
-	</div>
 	</div>
 	<!-- Product -->
 
@@ -61,6 +61,8 @@
 		<product-modal @close-product-modal="closeProductModal" :e="this.eachProduct" />
 		<div class="opacity-25 fixed inset-0 z-40 bg-black"></div>
 	</div>
+
+	<status-method v-if="this.showStatus" :status="status" />
 </template>
 
 <script>
@@ -69,6 +71,7 @@ import 'vue-snap/dist/vue-snap.css'
 
 import NavBar from "../components/NavBar.vue";
 import ProductModal from "../components/ProductModal.vue";
+import StatusMethod from "../components/StatusMethod.vue";
 
 export default {
 	components: {
@@ -77,11 +80,17 @@ export default {
 		
 		NavBar,
 		ProductModal,
+		StatusMethod,
 	},
 	props: [],
 	data() {
 		return {
 			hosts: process.env.VUE_APP_MASKAWA_HOST,
+			token: localStorage.getItem("token"),
+			userProfile: "",
+			getuser: `${process.env.VUE_APP_MASKAWA_HOST}/me`,
+			status: 0,
+      showStatus: false,
 
 			/* Brand */
 			brandlink: `${process.env.VUE_APP_MASKAWA_HOST}/brand`,
@@ -160,7 +169,7 @@ export default {
 			this.showProductModal = !this.showProductModal;
 			this.toggleId = id;
 			this.eachProduct = await this.fetchEachProduct();
-			console.log(this.eachProduct)
+			// console.log(this.eachProduct)
 		},
 		async closeProductModal () {
 			// console.log("close")
@@ -183,12 +192,49 @@ export default {
 
 		/* ==================== Filter Data Zone ==================== */
 
-		addRecord () {
+		getUserFromToken: async function () {
+      const res = await fetch(this.getuser, {
+        method: "GET",
+        headers: {
+          "Authorization": this.token,
+        },
+      });
+      if (res.ok) {
+        const user = await res.json();
+        this.userProfile = user;
+      }
+    },
 
+		async addRecord(uid,pid) {
+			// console.log(uid+""+pid)
+
+			let record = {
+				userid: uid,
+				productid: pid
+			}
+			let jsonRecord = JSON.stringify(record)
+			const res = await fetch(`${process.env.VUE_APP_MASKAWA_HOST}/addRecord`,{
+        method: "POST",
+        body: jsonRecord,
+        headers: {
+          "Authorization": this.token,
+          "Content-type": "application/json",
+          },
+        })
+
+        if (res.ok) {
+          this.status = 1
+          this.showStatus = true
+        } else {
+          this.status = 0
+          this.showStatus = true
+        }
+				setTimeout( () => location.reload(), 500);
 		}
 
 	},
 	async created() {
+		this.getUserFromToken();
 		this.brands = await this.fetchBrand();
 		this.colors = await this.fetchColor();
 		this.products = await this.fetchProduct();
