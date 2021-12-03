@@ -90,7 +90,7 @@ export default {
 		return {
 			hosts: process.env.VUE_APP_MASKAWA_HOST,
 			token: localStorage.getItem("token"),
-			userProfile: "",
+			userProfile: {role:{}},
 			getuser: `${process.env.VUE_APP_MASKAWA_HOST}/me`,
 			status: 0,
       showStatus: false,
