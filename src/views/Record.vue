@@ -41,7 +41,6 @@ export default {
   methods: {
     getUserFromToken: async function () {
       let token = localStorage.getItem("token");
-      // console.log(token);
       const res = await fetch(this.getuser, {
         method: "GET",
         headers: {
@@ -51,7 +50,6 @@ export default {
       if (res.ok) {
         const user = await res.json();
         this.userProfile = user;
-        // console.log(user);
       }
     },
     async fetchEachProduct() {

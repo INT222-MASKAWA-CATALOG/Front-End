@@ -49,7 +49,10 @@
 	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
 		<div v-for="p in filterShow()" :key="p.productid" class="bg-yellowPastel shadow-lg rounded-lg relative">
 			<img :src="`${hosts}/Files/${p.image}`" v-on:click="toggleProductModal(p.productid)" class="my-auto mx-auto object-cover w-full h-72" />
-			<button v-if="this.userProfile" class="ri-bookmark-line absolute top-2 right-2 text-3xl z-40" @click="addRecord(this.userProfile.userid,p.productid)"/>
+			<div v-if="this.userProfile">
+				<button v-if="p.bookmark" class="ri-bookmark-fill absolute top-2 right-2 text-3xl z-40" @click="delRecord(this.userProfile.userid,p.productid)" />
+				<button v-else class="ri-bookmark-line absolute top-2 right-2 text-3xl z-40" @click="addRecord(this.userProfile.userid,p.productid)" />
+			</div>
 			<div class="flex justify-between" v-on:click="toggleProductModal(p.productid)">
 				<span class="text-xl mx-1">{{ p.productname }}</span>
 			</div>
@@ -92,6 +95,8 @@ export default {
 			status: 0,
       showStatus: false,
 
+			bookmark: false,
+
 			/* Brand */
 			brandlink: `${process.env.VUE_APP_MASKAWA_HOST}/brand`,
 			brands: [],
@@ -105,6 +110,7 @@ export default {
 			/* Product */
 			productlink: `${process.env.VUE_APP_MASKAWA_HOST}/product`,
 			products: [],
+			record: false,
 			/* Product */
 			eachProduct: [],
 			toggleId: 0,
@@ -230,13 +236,30 @@ export default {
           this.showStatus = true
         }
 				setTimeout( () => location.reload(), 500);
-		}
+		},
+		async checkBookmark() {
+			// console.log(this.userProfile)
+			// let array = []
+			for (let i = 0; i < this.userProfile.record.length; i++) {
+				const element = this.userProfile.record[i].productid;
+				// array.push(element)
+				for (let j = 0; j < this.products.length; j++) {
+					const element2 = this.products[j].productid;
+					if (element == element2) {
+						this.products[j].bookmark = true
+					}
+				}
+			}
+			// console.log(array)
+
+		},
 
 	},
 	async created() {
 		if(localStorage.getItem("token") != null) {
 			this.getUserFromToken();
 		}
+		setTimeout(() => this.checkBookmark(),500)
 		this.brands = await this.fetchBrand();
 		this.colors = await this.fetchColor();
 		this.products = await this.fetchProduct();
