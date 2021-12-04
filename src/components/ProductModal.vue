@@ -1,6 +1,6 @@
 <template>
 	<div class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-		<div class="relative w-288 h-96">
+		<div class="relative w-4/5 h-96">
 			<!--content-->
 			<div class="rounded-3xl bg-white outline-none focus:outline-none">
 				<!--header-->

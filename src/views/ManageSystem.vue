@@ -28,7 +28,7 @@
 				<div class="col-span-4 select-none text-gray-400 mb-4">Email</div>
 				<div class="col-span-2 select-none text-gray-400 mb-4">Role</div>
 			</div>
-			<div v-for="u in users" :key="u.userid" class="bg-white shadow-sm my-0.5 py-1 grid grid-cols-12">
+			<div v-for="u in hideCurrentUser(this.users)" :key="u.userid" class="bg-white shadow-sm my-0.5 py-1 grid grid-cols-12">
 				<div class="col-span-3 ml-4">{{ u.username }}</div>
 				<div class="col-span-4">{{ u.email }}</div>
 				<div class="col-span-2">{{ u.role.name}}</div>
@@ -464,6 +464,16 @@ export default {
 				alert("หยุดเดี๋ยวนี้เลยนะ เจ้าจอมจุ้นจ้าน")
 				this.$router.push("/home")
 			}
+		},
+
+		hideCurrentUser(users) {
+			let x = {}
+			x = users.find(u => u.userid == this.me.userid)
+			const index = users.indexOf(x)
+			if (index > -1) {
+				users.splice(index,1)
+			}
+			return users;
 		}
 	},
 	async created() {

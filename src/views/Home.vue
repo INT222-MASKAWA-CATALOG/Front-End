@@ -1,9 +1,9 @@
 <template>
 	<nav-bar head="MASKAWA" />
-	<p class="text-gray-300 text-xl font-light my-3 text-center select-none">Get Ready for the MASKAWA</p>
+	<p class="text-gray-300 md:text-xl font-light my-3 text-center select-none">Get Ready for the MASKAWA</p>
 
 	<!-- Carousel -->
-	<carousel class="story-carousel story-carousel--colors text-3xl mx-auto text-center mb-12 w-10/12">
+	<carousel class="story-carousel story-carousel--colors md:text-3xl mx-auto text-center md:mb-12 md:w-10/12">
 		<slide class="story-carousel__slide">
 			<img src="../assets/slide1.png" />
 		</slide>
@@ -17,7 +17,7 @@
 	<!-- Carousel -->
 
 	<!-- Filter & Search -->
-	<div class="mx-40 border-t-3 border-b-3 border-yellowPastel py-2 flex">
+	<div class="mx-10 md:mx-20 lg:mx-40 border-t-3 border-b-3 border-yellowPastel py-2 flex">
 		<div id="brandFilter" class="">
 			<select name="brand" v-model="inputBrand" class="rounded-md focus:outline-none p-2 shadow-md w-32">
 				<option value="" class="uppercase" disabled hidden selected>Brand</option>
@@ -46,7 +46,7 @@
 	<!-- Filter & Search -->
 
 	<!-- Product -->
-	<div class="grid grid-cols-3 gap-12 my-12 mx-40">
+	<div class="grid xl:grid-cols-3 xl:gap-12 xl:my-12 lg:grid-cols-2 lg:gap-8 lg:mx-40 md:mx-40 mx-8">
 		<div v-for="p in filterShow()" :key="p.productid" class="bg-yellowPastel shadow-lg rounded-lg relative">
 			<img :src="`${hosts}/Files/${p.image}`" v-on:click="toggleProductModal(p.productid)" class="my-auto mx-auto object-cover w-full h-72" />
 			<div v-if="this.userProfile.role.roleid == 1">
