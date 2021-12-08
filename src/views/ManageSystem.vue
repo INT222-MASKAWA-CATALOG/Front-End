@@ -81,10 +81,12 @@
 						<div class="my-2">
 							<label for="brandname" class="mr-2">Brandname: </label>
 							<input id="brandname" type="text" v-model="brandname" placeholder="" class="rounded-md focus:outline-none py-1 px-2 shadow-md" />
+							<p v-if="invalidBrandname" class="text-red-500 text-sm text-left italic">** Please enter Brand name ! **</p>
 						</div>
 						<div class="my-2">
 							<label for="blink" class="mr-2">Brandlink: </label>
 							<input id="blink" type="text" v-model="blink" placeholder="" class="rounded-md focus:outline-none py-1 px-2 shadow-md" />
+							<p v-if="invalidBlink" class="text-red-500 text-sm text-left italic">** Please enter Brand Link ! **</p>
 						</div>
 						<button type="submit" class="text-white bg-buttonGreen w-24 py-2 rounded-md shadow-lg text-lg my-2">
 							<i class="ri-save-3-line text-base align-middle"></i> SAVE
@@ -136,10 +138,12 @@
 						<div class="my-2">
 							<label for="colorname" class="mr-2">Colorname: </label>
 							<input id="colorname" type="text" v-model="colorname" placeholder="" class="rounded-md focus:outline-none py-1 px-2 shadow-md" />
+							<p v-if="invalidColorname" class="text-red-500 text-sm text-left italic">** Please enter Color name ! **</p>
 						</div>
 						<div class="my-2">
 							<label for="hexcode" class="mr-2">Hexcode: </label>
 							<input id="hexcode" type="color" v-model="hexcode" placeholder="" class="rounded-md focus:outline-none py-1 px-2 shadow-md" />
+							<p v-if="invalidHexcode" class="text-red-500 text-sm text-left italic">** Please enter Hexcode ! **</p>
 						</div>
 						<button type="submit" class="text-white bg-buttonGreen w-24 py-2 rounded-md shadow-lg text-lg my-2">
 							<i class="ri-save-3-line text-base align-middle"></i> SAVE
@@ -299,7 +303,9 @@ export default {
 			this.invalidBrandname = this.brandname !== '' ? true : false;
 			this.invalidBlink = this.blink !== '' ? true : false;
 
-			if(this.invalidBrandname && this.invalidBlink) {
+			let checkform = (this.invalidBrandname && this.invalidBlink)
+
+			if(!checkform) {
 				let brandData = {
 					brandname: this.brandname,
 					brandlink: this.blink
@@ -325,12 +331,14 @@ export default {
 			}
 		},
 		async submitColor() {
-			this.invalidColorname = this.colorname !== '' ? true : false;
-			this.invalidHexcode = this.hexcode !== '' ? true : false;
+			this.invalidColorname = this.colorname === '' ? true : false;
+			this.invalidHexcode = this.hexcode === '' ? true : false;
 
 			// console.log(this.colorname + this.hexcode.toUpperCase())
 
-			if(this.invalidColorname && this.invalidHexcode) {
+			let checkform = (this.invalidColorname && this.invalidHexcode)
+
+			if(!checkform) {
 				let colorData = {
 					colorname: this.colorname,
 					hexcode: this.hexcode.toUpperCase()

@@ -163,9 +163,17 @@ export default {
 	},
 	methods: {
 		submitForm() {
-			let checkForm = (this.productname !== "" && this.saledate !== null && this.description !== "" && this.images !== null && this.brandid !== 0 && this.colorid !== 0)
+			
+			this.invalidProductname = this.productname === "" ? true : false;
+			this.invalidSaledate = this.saledate === null ? true : false;
+			this.invalidDescription = this.description === "" ? true : false;
+			this.invalidImage = this.image === null ? true : false;
+			this.invalidBrandid = this.brandid === 0 ? true : false;
+			this.invalidColorid = this.colorid === 0 ? true : false;
 
-			if (checkForm) {
+			let checkForm = (this.invalidProductname && this.invalidSaledate && this.invalidDescription && this.invalidImage && this.invalidBrandid && this.invalidColorid)
+
+			if (!checkForm) {
 				let productData = {
 					productname: this.productname,
 					saledate: this.saledate,

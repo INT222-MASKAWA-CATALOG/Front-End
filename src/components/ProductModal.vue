@@ -11,36 +11,35 @@
 				<!--header-->
 
 				<!--body-->
-				<div class="text-sm flex flex-col">
-					<div class="grid grid-cols-8 gap-8">
-						<div class="col-span-3">
-							<img :src="`${hosts}/Files/${e.image}`" class="object-contain w-full h-80 m-4 mt-0" />
+				<div class="text-sm flex lg:flex-col flex-row my-1">
+					<div class="lg:grid lg:grid-cols-8 lg:gap-8">
+						<div class="lg:col-span-3 ">
+							<img :src="`${hosts}/Files/${e.image}`" class="object-contain lg:w-full w-4/5 lg:h-80 h-60 lg:m-4 mx-auto mt-0" />
 						</div>
-						<div class="flex flex-col mx-4 col-span-5">
+						<div class="flex flex-col mx-2 lg:col-span-5 mb-6">
 
 							<!-- Product Name -->
-							<span class="text-4xl">{{ e.productname }}</span>
+							<span class="lg:text-4xl text-base">{{ e.productname }}</span>
 
 							<!-- Brand -->
-							<span class="text-lg">Brand | <span class="text-gray-400">{{ e.brandname }}</span></span>
+							<span class="lg:text-lg text-sm">Brand | <span class="text-gray-400">{{ e.brandname }}</span></span>
 
 							<!-- Online Shop -->
 							<div v-for="s in e.onlineshop" :key="s.onlineid" class="flex items-center gap-4">
-								<div class="max-w-xss border my-1 w-28">
+								<div class="max-w-xss border my-1 lg:w-28 w-16">
 									<img :src="`${hosts}/Files/${s.shop.logo}`" class="h-7 mx-auto"/>
 								</div>
-								<span class="text-lg">THB {{ s.price }}</span>
-								<div class="border border-black rounded px-2 py-1 shadow-md">
+								<span class="lg:text-lg text-sm">THB {{ s.price }}</span>
+								<div class="border border-black rounded lg:px-2 px-1 py-1 shadow-md lg:text-base text-sm">
 									<a :href="`${s.productlink}`" >ไปที่ร้านค้า</a>
 								</div>
 							</div>
 							<!-- Online Shop -->
 							
 							<!-- Description -->
-							<span class="text-xl">PRODUCT OVERVIEW</span>
-							<span class="text-sm text-justify">{{ e.description }}</span>
+							<span class="lg:text-xl lg:font-normal font-bold mt-2">PRODUCT OVERVIEW</span>
+							<span class="lg:text-sm text-xs text-justify">{{ e.description }}</span>
 							<!-- Description -->
-
 						</div>
 					</div>
 				</div>

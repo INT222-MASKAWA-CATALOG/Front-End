@@ -3,7 +3,7 @@
 	<p class="text-gray-300 md:text-xl font-light my-3 text-center select-none">Get Ready for the MASKAWA</p>
 
 	<!-- Carousel -->
-	<carousel class="story-carousel story-carousel--colors md:text-3xl mx-auto text-center md:mb-12 md:w-10/12">
+	<carousel class="story-carousel story-carousel--colors md:text-3xl mx-auto text-center md:mb-12 mb-6 md:w-10/12">
 		<slide class="story-carousel__slide">
 			<img src="../assets/slide1.png" />
 		</slide>
@@ -17,28 +17,28 @@
 	<!-- Carousel -->
 
 	<!-- Filter & Search -->
-	<div class="mx-10 md:mx-20 lg:mx-40 border-t-3 border-b-3 border-yellowPastel py-2 flex">
-		<div id="brandFilter" class="">
-			<select name="brand" v-model="inputBrand" class="rounded-md focus:outline-none p-2 shadow-md w-32">
+	<div class="mx-10 md:mx-20 lg:mx-40 border-t-3 border-b-3 border-yellowPastel py-2 flex flex-wrap ">
+		<div id="brandFilter" class="md:mb-0 mb-2">
+			<select name="brand" v-model="inputBrand" class="rounded-md focus:outline-none p-2 shadow-md md:w-32">
 				<option value="" class="uppercase" disabled hidden selected>Brand</option>
 				<option v-for="b in brands" :key="b.brandid" :value="b.brandname">
 					{{ b.brandname }}
 				</option>
 			</select>
 		</div>
-		<div @click="this.inputBrand = ''" class="ri-filter-off-line text-2xl my-auto ml-2"/>
+		<div @click="this.inputBrand = ''" class="ri-filter-off-line text-2xl my-auto ml-2 md:mb-0 mb-2"/>
 
-		<div id="colorFilter" class="ml-8">
-			<select name="color" v-model="inputColor" class="rounded-md focus:outline-none p-2 shadow-md w-32">
+		<div id="colorFilter" class="md:ml-8 md:mb-0 mb-2">
+			<select name="color" v-model="inputColor" class="rounded-md focus:outline-none p-2 shadow-md md:w-32">
 				<option value="" class="uppercase" disabled hidden selected>Color</option>
 				<option v-for="c in colors" :key="c.colorid" :value="c.colorname">
 					{{ c.colorname }}
 				</option>
 			</select>
 		</div>
-		<div @click="this.inputColor = ''" class="ri-filter-off-line text-2xl my-auto ml-2"/>
+		<div @click="this.inputColor = ''" class="ri-filter-off-line text-2xl my-auto ml-2 md:mb-0 mb-2"/>
 		
-		<div id="search" class="bg-gray-200 p-2 w-min ml-auto rounded-lg flex select-none">
+		<div id="search" class="bg-gray-200 p-2 w-min md:ml-auto rounded-lg flex select-none">
 			<input type="text" v-model="inputName" placeholder="Search ..." class="bg-gray-200 focus:outline-none">
 			<i class="ri-search-line"/>
 		</div>
@@ -46,15 +46,15 @@
 	<!-- Filter & Search -->
 
 	<!-- Product -->
-	<div class="grid xl:grid-cols-3 xl:gap-12 xl:my-12 lg:grid-cols-2 lg:gap-8 lg:mx-40 md:mx-40 mx-8">
+	<div class="grid xl:grid-cols-3 xl:gap-12 xl:my-12 lg:grid-cols-2 lg:gap-8 lg:mx-40 md:mx-40 mx-8 my-8 gap-8">
 		<div v-for="p in filterShow()" :key="p.productid" class="bg-yellowPastel shadow-lg rounded-lg relative">
-			<img :src="`${hosts}/Files/${p.image}`" v-on:click="toggleProductModal(p.productid)" class="my-auto mx-auto object-cover w-full h-72" />
+			<img :src="`${hosts}/Files/${p.image}`" v-on:click="toggleProductModal(p.productid)" class="my-auto mx-auto object-cover w-full lg:h-72 h-60" />
 			<div v-if="this.userProfile.role.roleid == 1">
 				<button v-if="p.bookmark" class="ri-bookmark-fill absolute top-2 right-2 text-3xl z-40 text-yellow-400" @click="delRecord(this.userProfile,p.productid)" />
 				<button v-else class="ri-bookmark-line absolute top-2 right-2 text-3xl z-40" @click="addRecord(this.userProfile.userid,p.productid)" />
 			</div>
 			<div class="flex justify-between" v-on:click="toggleProductModal(p.productid)">
-				<span class="text-xl mx-1">{{ p.productname }}</span>
+				<span class="lg:text-xl text-base mx-1">{{ p.productname }}</span>
 			</div>
 		</div>
 	</div>
