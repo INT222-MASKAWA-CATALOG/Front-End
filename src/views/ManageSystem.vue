@@ -468,8 +468,8 @@ export default {
 		},
 
 		async checkRoleAuthen() {
-			if (localStorage.getItem("token") == null || this.me.role.roleid != 2) {
-				alert("หยุดเดี๋ยวนี้เลยนะ เจ้าจอมจุ้นจ้าน")
+			if (localStorage.getItem("token") == null && this.me.role.roleid != 2) {
+				alert("คุณไม่ใช่ ADMIN กลับไปดูในหน้าหลักดีกว่านะ แล้ว LOGIN กลับมาในฐานะ ADMIN นะ")
 				this.$router.push("/home")
 			}
 		},

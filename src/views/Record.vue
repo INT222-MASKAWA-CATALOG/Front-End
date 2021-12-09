@@ -100,8 +100,8 @@ export default {
 				setTimeout( () => location.reload(), 500);
 		},
     checkRoleAuthen: async function () {
-			if (localStorage.getItem("token") == null || this.me.role.roleid != 1) {
-				alert("หยุดเดี๋ยวนี้เลยนะ เจ้าจอมจุ้นจ้าน")
+			if (localStorage.getItem("token") == null && this.me.role.roleid != 1) {
+				alert("คุณไม่ใช่ USER กลับไปดูในหน้าหลักดี แล้ว LOGIN กลับมาในฐานะ USER นะ")
 				this.$router.push("/home")
 			}
 		}

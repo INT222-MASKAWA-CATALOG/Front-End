@@ -266,8 +266,16 @@ export default {
 			// console.log(this.image);
 			// console.log(this.image.name);
 		},
+
+		async checkRoleAuthen() {
+			if (localStorage.getItem("token") == null && (this.me.role.roleid != 2 || this.me.role.roleid != 1)) {
+				alert("คุณไม่ได้ LOGIN อยู่นะ ไป LOGIN แล้วค่อยกลับมานะ")
+				this.$router.push("/home")
+			}
+		},
 	},
 	async created() {
+		this.checkRoleAuthen();
 		this.imageshow = `${this.host}/Files/${this.dataEditProduct.image}`
     const response = await fetch(this.imageshow);
 		const blob = await response.blob()
